@@ -1,0 +1,8 @@
+.editors {
+  & > .panel.left {
+    width: 40%;
+  }
+  & > .panel.right {
+    width: 60%;
+  }
+}

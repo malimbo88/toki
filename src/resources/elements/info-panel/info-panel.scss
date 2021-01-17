@@ -1,0 +1,169 @@
+@import '../../../style/partials/_variable';
+@import '../../../style/partials/_mixin';
+
+.panel_section {
+  padding: 0.4em;
+  background-color: $color_panel_section;
+  border-radius: 3px;
+  font-weight: bold;
+
+  &:not(:last-child) {
+    margin-bottom: 0.4em;
+  }
+
+  & > h3 {
+    font-family: $roboto_font;
+    font-size: 0.7em;
+    text-transform: uppercase;
+    color: $color_background_panel;
+    margin-bottom: 0.5em;
+  }
+    .section {
+      list-style: none;
+      padding: 0.4em;
+
+       & > li {
+        margin-bottom: 0.4em;
+        display: flex;
+
+        /* Panel label */
+        &.panel_label {         
+          .label, .data {
+            height: 5em;
+            line-height: 5em;
+          }
+
+          input {
+            border: none;
+            outline: none;
+            cursor: pointer;
+            font-weight: 800;
+            font-family: $roboto_font_condensed;
+            
+             &::placeholder {
+               color: $color_text;
+               text-decoration: underline;
+             }
+
+             &:active, &:focus {
+               background-color: $color_white_text;
+               &::placeholder {
+                text-decoration: none;
+               }
+             }
+          }
+        }
+
+        .label, .data, .panel_comand {
+          display: inline-block;
+          height: 3em;
+          line-height: 3em;
+          padding: 0 0.4em;
+        }
+
+        /* Label list */
+        .label {
+          background-color: $color_label_title_panel;
+          flex-basis: 40%;
+          border-radius: 0.3em;
+          text-transform: uppercase;
+          font-size: 0.8em;
+          text-align: right;
+        }
+
+        /* Data list */
+        .data {
+          background-color: $color_label_panel;
+          flex-basis: 60%;
+          margin-left: 0.4em;
+          border-radius: 0.3em;
+          font-size: 0.8em;
+          display: flex;
+          align-items: center;
+          overflow: hidden;
+
+          /* Visibility */
+          & .visibility {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        
+            & > select {
+              width: 100%;
+              color: $color_text;
+              font-size: 1em;
+              @include select;
+            }
+          }
+            .square {
+              height: 1.6em;
+              width: 1.6em;
+              text-align: right;
+              border-radius: 0.3em;
+
+              &.active {
+                background-color:$color_active;
+              }
+
+              &.inactive {
+                background-color: $color_inactive;
+              }
+            }
+          }
+
+          /* Permissions */
+          .permissions {
+            display: flex;
+
+            & > .permissions_item {
+              background-color: $color_label_panel;
+              margin-left: 0.4em;
+              border-radius: 0.3em;
+              font-size: 0.8em;
+              display: flex;
+              padding: 0 0.4em;
+              align-items: center;
+              height: 3em;
+              line-height: 3em;
+
+              & > label {
+                margin-left: 0.4em;
+              }
+            }
+          }
+
+          /* Panel comand */
+          .panel_comand {
+            display: flex;
+
+            & > .comand {
+              background-color: $color_background_panel;
+              margin-left: 0.4em;
+              border-radius: 0.3em;
+              font-size: 0.8em;
+              text-transform: uppercase;
+              padding: 0 0.4em;
+              align-items: center;
+              height: 3em;
+              line-height: 3em;
+
+              &:first-child {
+                margin-left: 0;
+              }
+            }
+          }
+
+          /* Models */
+          & .models {
+            width: 100%;
+        
+            & > select {
+              width: 100%;
+              color: $color_text;
+              font-size: 1em;
+              @include select;
+            }
+          }
+       }
+    }
+}

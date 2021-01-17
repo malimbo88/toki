@@ -1,0 +1,43 @@
+<template>
+  <require from="./groups-objects.scss"></require>
+
+    <!-- Title -->
+    <h1 class="page_title">Gruppi di oggetti</h1>
+
+    <!-- Content wrapper -->
+    <div class="content_wrapper groups_objects">
+
+      <!-- Left panel -->
+      <div class="panel left">
+
+        <!-- Panel label -->
+        <div class="panel_row_text">
+          <h2>Lista</h2>
+        </div>
+
+        <!-- Languages -->
+        <div class="panel_row_text languages">
+          <select>
+            <option value="">${languages['1'].label}</option>
+          </select>
+        </div>
+        <!-- end Languages -->
+
+        <!-- List -->
+        <panel-list type="2" selected.bind="selected"></panel-list>
+      </div>
+      <!-- end Left panel -->
+
+      <!-- Right panel -->
+      <div class="panel right">
+        <div class="panel_row_text">
+          <h2>Info</h2>
+        </div>
+        <info-panel selected.bind="selected"></info-panel>
+      </div>
+      <!-- end Right panel -->
+
+    </div> 
+    <!-- end Content wrapper -->
+
+</template>

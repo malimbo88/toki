@@ -1,0 +1,37 @@
+<template>
+  <require from="./app-header.scss"></require>
+
+  <!-- Header -->
+  <header>
+    <div class="header_logo">
+      <img src="../../../../static/toki.png" alt="">
+    </div>
+    <nav class="nav_header">
+      <ul class="header_menu">
+        <li if.bind="modules['1'] === ''">
+          <a route-href="web-pages">Pagine web</a>
+        </li>
+        <li if.bind="modules['2'] === ''">
+          <a route-href="objects">Oggetti</a>
+        </li>
+        <li if.bind="modules['3'] === ''">
+          <a route-href="groups-objects">Gruppi di oggetti</a>
+        </li>
+        <li if.bind="modules['4'] === ''">
+          <a route-href="layout">Layout</a>
+        </li>
+        <li if.bind="modules['5'] === ''">
+          <a route-href="editors">Redattori</a>
+        </li>
+        <li if.bind="modules['6'] === ''">
+          <a route-href="visitors">Visitatori</a>
+        </li>
+        <li>
+          <span click.delegate="logout()">Logout</span>
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <!-- end Header -->
+
+</template>

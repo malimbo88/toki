@@ -1,0 +1,42 @@
+/* style/partials/_mixin */
+
+/* Button */
+@mixin button {
+  padding: 1.2em 3.2em;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  font-weight: 700;
+  border-radius: 0.5em;
+  box-shadow: 0px 0em 0.15em 0.2em rgba(0, 0, 0, 0.2);
+  font-family: $roboto_font_condensed;
+  border: 0.1em solid #000;
+
+  &:hover {
+    border: 0.1em solid rgba(255, 255, 255, 0.3);
+  }
+
+  &:active, &:focus {
+    outline: none;
+  }
+}
+
+/* Select */
+@mixin select {
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+  font-family: $roboto_font_condensed;
+  font-weight: bold;
+  text-decoration: underline;
+    
+  &:active, &:focus {
+    border: none;
+    outline: none;
+  }
+
+  & > option {
+    font-family: $roboto_font_condensed;
+    font-weight: bold;
+    background-color: $color_label_panel;
+  }
+}

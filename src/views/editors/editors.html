@@ -1,0 +1,36 @@
+<template>
+  <require from="./editors.scss"></require>
+
+    <!-- Title -->
+    <h1 class="page_title">Redattori</h1>
+
+    <!-- Content wrapper -->
+    <div class="content_wrapper editors">
+
+      <!-- Left panel -->
+      <div class="panel left">
+
+        <!-- Panel label -->
+        <div class="panel_row_text">
+          <h2>Gruppi</h2>
+        </div>
+
+        <!-- List -->
+        <panel-list type="1" selected.bind="selected"></panel-list>
+      </div>
+      <!-- end Left panel -->
+
+      <!-- Right panel -->
+      <div class="panel right">
+        <div class="panel_row_text">
+          <h2>Utenti</h2>
+        </div>
+        <!-- List -->
+        <panel-list type="1" selected.bind="selected"></panel-list>
+      </div>
+      <!-- Right panel -->
+
+    </div> 
+    <!-- end Content wrapper -->
+
+</template>

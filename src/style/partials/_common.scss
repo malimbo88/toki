@@ -1,0 +1,41 @@
+/* style/partials/_common */
+
+/* Body */
+body {
+  font-family: $roboto_font_condensed;
+  background-color: $color_bg_auth;
+  color: $color_text;
+  font-size: 0.7em;
+  font-weight: 600;
+}
+
+/* App container */
+.app_container {
+  height: 100vh;
+  padding: 0 0.4em 0 0.4em ;
+}
+
+/* App header */
+app-header + router-view {
+  display: block;
+  border-radius: 0.3em 0.3em 0 0;
+  border-top: 0.1em solid rgba(255, 255, 255, 0.1);
+  background-image: linear-gradient($color_home 5%, $color_label_title_panel 20%);
+  height: 100%;
+  padding: 0 0.4em;
+}
+
+/* Content */
+.page_title {
+  font-family: $roboto_font;
+  font-size: 0.9em;
+  text-transform: uppercase;
+  padding-left: 0.4em;
+  color: $color_page_title;
+  height: $page_title_heigth;
+  line-height: $page_title_heigth;
+}
+
+.content_wrapper {
+  display: flex;
+}

@@ -1,0 +1,46 @@
+<!-- auth/index.html -->
+<template>
+  <require from="./auth.scss"></require>
+
+  <!-- Auth -->
+  <div class="auth_container" if.bind="!api.authData">
+    <div class="auth_wrapper">
+
+      <!-- Logo -->
+      <div class="auth_logo">
+        <img src="../../../static/toki.png" alt="Toki">
+      </div>
+      <!-- end Logo -->
+
+      <!-- Login form -->
+      <div class="login_wrapper">
+        <form submit.delegate="login()">
+
+          <!-- Username -->
+          <div class="auth_input">
+            <label>Username</label>
+            <input type="text" value.bind="username">
+          </div>
+          <!-- end Username -->
+
+          <!-- Password -->
+          <div class="auth_input">
+            <label>Password</label>
+            <input type="text" value.bind="password">
+          </div>
+          <!-- end Password -->
+
+          <!-- Button -->
+          <div class="auth_button">
+            <button class="button" type="submit">Login</button>
+          </div>
+
+        </form>
+      </div>
+      <!-- end Login form -->
+
+    </div>
+  </div>
+  <!-- end Auth -->
+
+</template>

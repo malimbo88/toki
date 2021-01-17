@@ -1,0 +1,175 @@
+<template>
+  <require from="./info-panel.scss"></require>
+
+  <!-- Publication -->
+  <div class="panel_section">
+    <h3>Pubblicazione</h3>
+    <ul class="section">
+
+      <!-- Panel label -->
+      <li class="panel_label">
+        <div class="label">Label</div>
+        <div class="data" if.bind="!selected"></div>
+        <input class="data input_data" if.bind="selected" type="text" placeholder="${selected.data.label}">
+      </li>
+      <!-- end Panel label -->
+
+      <!-- Url -->
+      <li if.bind="router.currentInstruction.config.name === 'web-pages'">
+        <div class="label">
+          <span>Url</span>
+        </div>
+        <div class="data">
+          <span>${selected.data.url}</span>
+        </div>
+      </li>
+      <!-- end Url -->
+
+      <!-- Visibility -->
+      <li if.bind="router.currentInstruction.config.name === 'web-pages'">
+        <div class="label">Visibilità</div>
+        <div class="data">
+          <div class="visibility" if.bind="selected">
+            <select>
+              <option value="">${selected.status}</option>
+              <option value="">Attivo</option>
+              <option value="">Inattivo</option>
+            </select>
+            <span>
+              <div if.bind="selected.status === 'visible'" class="square active"></div>
+              <div if.bind="selected.status === 'disabled'" class="square inactive"></div>
+            </span>
+          </div>
+        </div>
+      </li>
+      <!-- end Visibility -->
+
+      <!-- Permission -->
+      <li if.bind="router.currentInstruction.config.name === 'web-pages'">
+        <div class="label">Permessi di visibilità</div>
+        <div class="permissions">
+          <div class="permissions_item" repeat.for="visitor of visitors">
+            <input type="checkbox" type="checkbox" checked.bind="permissions(selected, visitor, 'visitorsGroups')">
+            <label>${visitor.label}</label>
+          </div>
+        </div>
+      </li>
+      <!-- end Permission -->
+
+      <!-- Comand -->
+      <li if.bind="router.currentInstruction.config.name === 'web-pages'">
+        <div class="label">Comand</div>
+        <div class="panel_comand">
+          <div class="comand">Anteprima</div>
+          <div class="comand">Copia Url</div>
+        </div>
+      </li>
+      <!-- end Comand -->
+
+    </ul>
+  </div>
+  <!-- end Publication -->
+
+  <!-- Layout -->
+  <div class="panel_section">
+    <h3>Layout</h3>
+    <ul class="section">
+
+      <!-- Modello -->
+      <li if.bind="router.currentInstruction.config.name === 'web-pages'">
+        <div class="label">Modello</div>
+        <div class="data">
+          <div class="models" if.bind="selected">
+            <select>
+              <option repeat.for="model of models" if.bind="model.id === selected.template" value="">${model.label}</option>
+              <option repeat.for="model of models" value="">${model.label}</option>
+            </select>
+          </div>      
+        </div>
+      </li>
+      <!-- end Modello -->
+
+      <!-- Campinatura -->
+      <li>
+        <div class="label">Campinatura</div>
+        <div class="data">${selected.fieldsetLabel}</div>
+      </li>
+      <!-- Campinatura -->
+
+    </ul>
+  </div>
+  <!-- end Layout -->
+
+  <!-- Modify -->
+  <div class="panel_section">
+    <h3>Modifiche</h3>
+    <ul class="section">
+
+      <!-- Created at -->
+      <li>
+        <div class="label">Creato il</div>
+        <div class="data">${selected.createdDate}</div>
+      </li>
+      <!-- Created at -->
+
+      <!-- Created by -->
+      <li>
+        <div class="label">Creato da</div>
+        <div class="data">
+          ${selected.createdEditorName}
+        </div>
+      </li>
+      <!-- Created by -->
+
+      <!-- Modified at -->
+      <li>
+        <div class="label">Modificato il</div>
+        <div class="data">${selected.modifiedDate}</div>
+      </li>
+      <!-- Modified at -->
+
+      <!-- Modified by -->
+      <li>
+        <div class="label">Modificato da</div>
+        <div class="data">${selected.modifiedEditorName}</div>
+      </li>
+      <!-- Modified by -->
+
+       <!-- Permission -->
+       <li>
+        <div class="label">Permessi di modifica</div>
+        <div class="permissions">
+          <div class="permissions_item" repeat.for="editor of editors">
+            <input type="checkbox" type="checkbox" checked.bind="permissions(selected, editor, 'editorsGroups')">
+            <label>${editor.label}</label>
+          </div>
+        </div>
+      </li>
+      <!-- end Permission -->
+
+      <!-- Comand -->
+
+      <!-- If web-pages -->
+      <li if.bind="router.currentInstruction.config.name === 'web-pages'">
+        <div class="label">Comand</div>
+        <div class="panel_comand">
+          <div class="comand">Modifica</div>
+          <div class="comand">Crea figlia</div>
+          <div class="comand">Elimina</div>
+        </div>
+      </li>
+
+      <!-- If groups-objects -->
+      <li if.bind="router.currentInstruction.config.name === 'groups-objects'">
+        <div class="label">Comand</div>
+        <div class="panel_comand">
+          <div class="comand">Elimina</div>
+        </div>
+      </li>
+      <!-- end Comand -->
+
+    </ul>
+  </div>
+  <!-- end Modify -->
+
+</template>

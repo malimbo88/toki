@@ -1,0 +1,16 @@
+<template>
+  <require from="style/app.scss"></require>
+
+  <!-- App container -->
+  <div class="app_container">
+
+    <!-- App-header -->
+    <app-header if.bind="api.authData"></app-header>
+  
+    <!-- Router view -->
+    <router-view></router-view>
+
+  </div>
+  <!-- end App container -->
+
+</template>

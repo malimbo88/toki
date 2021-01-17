@@ -1,0 +1,52 @@
+@import '../../../style/partials/_variable';
+@import '../../../style/partials/_mixin';
+
+header {
+  height: $nav_height;
+  display: flex;
+  justify-content: space-between;
+
+  & > .header_logo {
+    width: 8.5em;
+    height: 100%;
+  }
+
+  & > .nav_header {
+    & > .header_menu {
+      list-style: none;
+
+      & > li {
+        line-height: 2.2em;
+        display: inline-block;
+        padding:0 1em;
+        border-radius: 0 0 3px 3px;
+        background: linear-gradient(#404040 30%, $color_label_title_panel 70%);
+        border: 0.1em solid rgba(255, 255, 255, 0.03);
+        border-top: none;
+        margin-left: 0.2em;
+        position: relative;
+
+        & > a, & > span {
+          font-family: $roboto_font;
+          color: $color_text;
+          cursor: pointer;
+          text-decoration: none;
+          font-size: 0.7em;
+          font-weight: 800;
+          text-transform: uppercase;
+        }
+
+        &:hover {
+          background: linear-gradient(#028FCA 10%, #8dd1dc 90%);
+          height: 2.6em;
+
+          & > a, & > span {
+            display: inline-block;
+            transform: translate(0, 0.3em);
+            color: $color_white_text;
+          }
+        }
+      }
+    }
+  }
+}
