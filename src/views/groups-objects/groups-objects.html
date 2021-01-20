@@ -1,38 +1,34 @@
 <template>
   <require from="./groups-objects.scss"></require>
-
-    <!-- Title -->
-    <h1 class="page_title">Gruppi di oggetti</h1>
+  <h1>Gruppi di oggetti</h1>
 
     <!-- Content wrapper -->
     <div class="content_wrapper groups_objects">
 
       <!-- Left panel -->
       <div class="panel left">
-
-        <!-- Panel label -->
-        <div class="panel_row_text">
-          <h2>Lista</h2>
-        </div>
+        <h2>Lista</h2>
 
         <!-- Languages -->
-        <div class="panel_row_text languages">
-          <select>
-            <option value="">${languages['1'].label}</option>
-          </select>
-        </div>
-        <!-- end Languages -->
-
-        <!-- List -->
+        <select value.bind="settings.selectedLanguage" class="panel_row_text languages">
+          <option repeat.for="lang of settings.data.languages" model.bind="lang.id">${lang.label}</option>
+        </select>
+      
         <panel-list type="2" selected.bind="selected"></panel-list>
+        
+        <!-- List footer -->
+        <div class="list_footer">
+          <button>
+            <span class="create">Crea</span>
+          </button>
+        </div>
+
       </div>
       <!-- end Left panel -->
 
       <!-- Right panel -->
       <div class="panel right">
-        <div class="panel_row_text">
-          <h2>Info</h2>
-        </div>
+        <h2>Info</h2>
         <info-panel selected.bind="selected"></info-panel>
       </div>
       <!-- end Right panel -->

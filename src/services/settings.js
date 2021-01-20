@@ -3,10 +3,22 @@ import {Api} from './api';
 
 @inject(Api)
 export class Settings {
+  selectedLanguage = null;
+
   constructor(api) {
     this.api = api;
     this._data = JSON.parse(localStorage.getItem('settings')) || null;
-    if (!this._data) this.init();
+    if (!this._data) {
+      this._data = {
+        templates: null,
+        languages: [],
+        visitorsGroups: null,
+        editorsGroups: null,
+        users: null,
+        selectedLanguage: '1'
+      };
+      this.init();
+    }
   }
 
   get data() {
@@ -22,15 +34,17 @@ export class Settings {
   init() {
     Promise.all([
       this.api.post('getTemplates', ''),
-      this.api.post('getLanguages', ''),
+      this.api.post('getLanguages', null),
       this.api.post('getVisitorsGroups', ''),
       this.api.post('getEditorsGroups', ''),
+      this.api.post('getUsers', '')
     ]).then(success => {
       let settings = {
-        templates: success[0].response,
-        languages: success[1].response,
-        visitorsGroups: success[2].response,
-        editorsGroups: success[3].response
+        templates: JSON.parse(success[0].response),
+        languages: Object.values(JSON.parse(success[1].response)),
+        visitorsGroups: JSON.parse(success[2].response),
+        editorsGroups: JSON.parse(success[3].response),
+        users: JSON.parse(success[4].response),
       };
       this.data = settings;
     });

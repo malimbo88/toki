@@ -1,2 +1,62 @@
 <template>
-</template>
+    <require from="./layout.scss"></require>
+    <h1>Layout</h1>
+  
+      <!-- Content wrapper -->
+      <div class="content_wrapper layout">
+  
+        <!-- Left panel -->
+        <div class="panel left">
+          <h2>Modelli</h2>
+
+          <!-- Languages -->
+          <select value.bind="settings.selectedLanguage" class="panel_row_text languages">
+            <option repeat.for="lang of settings.data.languages" model.bind="lang.id">${lang.label}</option>
+          </select>
+  
+          <simple-list type="tableStandard" records.bind="groups"></simple-list>
+  
+          <!-- List footer -->
+          <div class="list_footer">
+            <button>
+              <span class="create">Crea</span>
+            </button>
+          </div>
+  
+        </div>
+        <!-- end Left panel -->
+
+        <!-- Center panel -->
+        <div class="panel right">
+          <h2>Fogli di stile</h2>
+          <simple-list type="tableAssetsCss" records.bind="assetsCss"></simple-list>
+
+          <!-- List footer -->
+          <div class="list_footer">
+            <button>
+              <span class="create">Crea</span>
+            </button>
+          </div>
+
+        </div>
+        <!-- end Center panel -->
+  
+        <!-- Right panel -->
+        <div class="panel right">
+          <h2>Javascript</h2>
+          <simple-list type="tableAssetsJs" records.bind="assetsJs"></simple-list>
+  
+          <!-- List footer -->
+          <div class="list_footer">
+            <button>
+              <span class="create">Crea</span>
+            </button>
+          </div>
+  
+        </div>
+        <!-- end Right panel -->
+  
+      </div> 
+      <!-- end Content wrapper -->
+  
+  </template>

@@ -1,13 +1,12 @@
 <template>
   <require from="./app-header.scss"></require>
 
-  <!-- Header -->
   <header>
     <div class="header_logo">
       <img src="../../../../static/toki.png" alt="">
     </div>
-    <nav class="nav_header">
-      <ul class="header_menu">
+    <nav>
+      <ul>
         <li if.bind="modules['1'] === ''">
           <a route-href="web-pages">Pagine web</a>
         </li>
@@ -32,6 +31,5 @@
       </ul>
     </nav>
   </header>
-  <!-- end Header -->
 
 </template>

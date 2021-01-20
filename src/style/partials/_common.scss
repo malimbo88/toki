@@ -5,37 +5,47 @@ body {
   font-family: $roboto_font_condensed;
   background-color: $color_bg_auth;
   color: $color_text;
-  font-size: 0.7em;
-  font-weight: 600;
+  font-size: $font_size;
+  font-weight: 800;
 }
 
 /* App container */
 .app_container {
   height: 100vh;
-  padding: 0 0.4em 0 0.4em ;
+  padding: 0 $panel_gap 0 $panel_gap;
 }
 
 /* App header */
 app-header + router-view {
   display: block;
-  border-radius: 0.3em 0.3em 0 0;
-  border-top: 0.1em solid rgba(255, 255, 255, 0.1);
+  border-radius: $container_border_radius $container_border_radius 0 0;
+  border: 1.5px solid rgba(255, 255, 255, 0.15);
+  border-bottom: none;
   background-image: linear-gradient($color_home 5%, $color_label_title_panel 20%);
-  height: 100%;
-  padding: 0 0.4em;
+  height: calc(100vh - #{$nav_height});
+  padding: 0 $panel_gap;
 }
 
 /* Content */
-.page_title {
+h1 {
   font-family: $roboto_font;
-  font-size: 0.9em;
+  font-size: $h1_font_size;
   text-transform: uppercase;
-  padding-left: 0.4em;
-  color: $color_page_title;
+  padding-left: $panel_gap;
   height: $page_title_heigth;
   line-height: $page_title_heigth;
+  color: $color_page_title;
+  background-color: $color_page_title;
+  background-image: linear-gradient($color_page_title 40%, #66ffff);
+  background-size: 100%;
+  -webkit-background-clip: text;
+  -moz-background-clip: text;
+  -webkit-text-fill-color: transparent; 
+  -moz-text-fill-color: transparent;
+  font-weight: 800;
 }
 
 .content_wrapper {
   display: flex;
+  max-height: calc(100vh - #{$nav_height});
 }

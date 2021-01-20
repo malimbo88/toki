@@ -3,21 +3,28 @@
 /* Fonts */
 $roboto_font_condensed: 'Roboto Condensed', sans-serif;
 $roboto_font: 'Roboto', sans-serif;
+$font_size: 0.67rem;
+$h1_font_size: 0.75rem;
+$h2_font_size: 0.55rem;
+$h3_font_size: 0.57rem;
+$label_icon_font_size: 0.57rem;
+$header_nav_font_size: 0.55rem;
 
 /* Colors */
-$color_white_text: #fEfEfE;
+$color_white_text: #e6e6e6;
 $color_border_auth: #121212;
 $color_bg_auth: #181818;
 $color_gradient_bg_1: #0d0d0d;
 $color_gradient_bg_2: #1F1F1F;
 $color_page_title: #7FCDEE;
-$color_input_auth: #C0C0C0;
-$color_text: #BFBFBF;
+$color_input_auth: #d9d9d9;
+$color_text: #c6c6c6;
 $color_home: #3D3D3D;
 $color_background_panel: #202020;
-$color_label_title_panel: #303030;
-$color_label_panel: #505050;
-$color_panel_section: #404040;
+$color_title_info_panel: #b3b3b3;
+$color_label_title_panel: #333333;
+$color_label_panel: #555555;
+$color_panel_section: #454545;
 $color_table_row_light:#F9F9F9;
 $color_table_row_selected: #7BCAEB;
 $outline_button_auth: #028FCA;
@@ -26,13 +33,27 @@ $color_inactive: #E66C00;
 $color_obj_groups_records: #BDCD86;
 $color_td_parent:rgb(164, 164, 164, 0.8);
 
-/* Header */
-$nav_height: 3em;
+/* Auth */
+$auth_panel_width: 19rem;
+$auth_gap: 0.7rem;
+$auth_logo: 13rem;
 
-/* Panel */
-$panel_gap: 0.4em;
-$panel_row_height: 2em;
-$panel_row_mb: 0.4em;
+/* Header */
+$nav_height: 2.65rem;
+$logo_width: 7rem;
+$nav_items_margin: 2px;
 
 /* Content */
-$page_title_heigth: 3em;
+$page_title_heigth: 2.7rem;
+
+/* Panel */
+$panel_gap: 4.5px;
+$container_border_radius: 0.25rem;
+$panel_border_radius: 0.2rem;
+$panel_row_height: 1.5rem;
+$panel_list_buttons: 2.7rem;
+
+/* Panel info */
+$info_panel_row: 1.6rem;
+$label_height: 2.5rem;
+

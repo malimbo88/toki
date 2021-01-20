@@ -9,11 +9,9 @@ export class Index {
   type = null;
   languages = null;
   
-  /* Constructor */
   constructor(router, api, settings) {
     this.router = router;
     this.api = api;
     this.settings = settings;
-    this.languages = JSON.parse(this.settings.data.languages);
   }
 }

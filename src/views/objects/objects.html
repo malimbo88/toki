@@ -1,2 +1,45 @@
 <template>
-</template>
+    <require from="./objects.scss"></require>
+    <h1>Oggetti</h1>
+      
+      <!-- Content wrapper -->
+      <div class="content_wrapper objects">
+        
+        <!-- Panel left -->
+        <div class="panel ${parent ? 'left' : ''}">
+          <h2>Gruppi di oggetti</h2>
+
+          <!-- Object groups -->
+          <ul class="obj_groups" if.bind="!parent">
+            <li repeat.for="record of objectGroups" click.delegate="selectObjectGroup(record)">
+              <div class="obj_group_id">${record.id}</div>
+              <div class="obj_group_label">${record.data.label}</div>
+            </li>
+          </ul>
+          <!-- end Object groups -->
+
+          <div if.bind="parent">
+            <select class="panel_row_text obj_groups_sel">
+              <option repeat.for="record of objectGroups" value="${record.id}">${record.data.label}</option>
+            </select>
+
+            <!-- Languages -->
+            <select value.bind="settings.selectedLanguage" class="panel_row_text languages">
+              <option repeat.for="lang of settings.data.languages" model.bind="lang.id">${lang.label}</option>
+            </select>
+            <panel-list type="3" parent.bind="parent" fieldset.bind="fieldset" selected.bind="selected"></panel-list>
+          </div>
+          
+        </div>
+        <!-- end Panel left -->
+
+        <!-- Panel right -->
+        <div if.bind="parent" class="panel right">
+          <h2>Info</h2>
+          <info-panel selected.bind="selected"></info-panel>
+        </div>
+
+      </div>
+      <!-- end Content wrapper -->
+
+  </template>

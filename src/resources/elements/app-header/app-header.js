@@ -7,14 +7,12 @@ import {Api} from '../../../services/api';
 export class AppHeader {
   modules = null;
 
-  /* Constructor */
   constructor(router, api) {
     this.router = router;
     this.api = api;
     this.modules = this.api.authData.modules;
   }
 
-  /* Logout */
   logout() {
     localStorage.clear();
     this.api.authData = null;

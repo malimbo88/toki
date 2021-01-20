@@ -1,0 +1,27 @@
+<template>
+  <require from="./simple-list.scss"></require>
+
+  <p if.bind="!records">Caricamento in corso...</p>
+  <p if.bind="records.length === 0">Nessun record presente</p>
+
+  <!-- Table -->
+  <table>
+    <thead>
+      <tr>
+        <th class="id">ID</th>
+        <th>Label</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr repeat.for="record of records">
+        <td>${record.id}</td>
+        <td if.bind="type === 'tableStandard'">${record.label}</td>
+        <td if.bind="type === 'tableUsers'">${record.name}</td>
+        <td if.bind="type === 'tableAssetsCss'">${record.label}.css</td>
+        <td if.bind="type === 'tableAssetsJs'">${record.label}.js</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- end Table -->
+
+</template>

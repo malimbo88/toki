@@ -2,14 +2,9 @@
   <require from="style/app.scss"></require>
 
   <!-- App container -->
-  <div class="app_container">
-
-    <!-- App-header -->
+  <div class="app_container">  
     <app-header if.bind="api.authData"></app-header>
-  
-    <!-- Router view -->
     <router-view></router-view>
-
   </div>
   <!-- end App container -->
 

@@ -1,0 +1,11 @@
+@import '../../style/partials/_variable';
+@import '../../style/partials/_mixin';
+
+.visitors {
+    & > .panel.left {
+      width: 40%;
+    }
+    & > .panel.right {
+      width: 60%;
+    }
+  }

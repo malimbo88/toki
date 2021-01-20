@@ -1,0 +1,11 @@
+.layout {
+    & > .panel.left {
+      width: calc(100% / 3);
+    }
+    & > .panel.center {
+        width: calc(100% / 3);
+    }
+    & > .panel.right {
+        width: calc(100% / 3);
+    }
+  }

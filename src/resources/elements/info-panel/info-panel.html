@@ -4,49 +4,38 @@
   <!-- Publication -->
   <div class="panel_section">
     <h3>Pubblicazione</h3>
-    <ul class="section">
+    <ul>
 
       <!-- Panel label -->
-      <li class="panel_label">
-        <div class="label">Label</div>
-        <div class="data" if.bind="!selected"></div>
-        <input class="data input_data" if.bind="selected" type="text" placeholder="${selected.data.label}">
+      <li class="label">
+        <div class="title">Label</div>
+        <div class="info">
+          <input if.bind="selected" type="text" placeholder="${selected.data.label}">
+        </div>
       </li>
-      <!-- end Panel label -->
 
       <!-- Url -->
       <li if.bind="router.currentInstruction.config.name === 'web-pages'">
-        <div class="label">
-          <span>Url</span>
-        </div>
-        <div class="data">
-          <span>${selected.data.url}</span>
-        </div>
+        <div class="title">Url</div>
+        <div class="info url">${selected.data.url}</div>
       </li>
-      <!-- end Url -->
 
       <!-- Visibility -->
-      <li if.bind="router.currentInstruction.config.name === 'web-pages'">
-        <div class="label">Visibilità</div>
-        <div class="data">
-          <div class="visibility" if.bind="selected">
-            <select>
-              <option value="">${selected.status}</option>
-              <option value="">Attivo</option>
-              <option value="">Inattivo</option>
-            </select>
-            <span>
-              <div if.bind="selected.status === 'visible'" class="square active"></div>
-              <div if.bind="selected.status === 'disabled'" class="square inactive"></div>
-            </span>
-          </div>
+      <li if.bind="router.currentInstruction.config.name !== 'groups-objects'">
+        <div class="title">Visibilità</div>
+        <div class="info visibility">
+          <select class="${selected.status === 'visible' ? 'active' : 'inactive'}" if.bind="selected">
+            <option value="${selected.status}">${selected.status}</option>
+            <option value="${selected.status}">Attivo</option>
+            <option value="${selected.status}">Inattivo</option>
+          </select>
+          <div if.bind="selected" class="square ${selected.status === 'visible' ? 'active' : 'inactive'}"></div>
         </div>
       </li>
-      <!-- end Visibility -->
 
       <!-- Permission -->
       <li if.bind="router.currentInstruction.config.name === 'web-pages'">
-        <div class="label">Permessi di visibilità</div>
+        <div class="title">Permessi di visibilità</div>
         <div class="permissions">
           <div class="permissions_item" repeat.for="visitor of visitors">
             <input type="checkbox" type="checkbox" checked.bind="permissions(selected, visitor, 'visitorsGroups')">
@@ -54,17 +43,19 @@
           </div>
         </div>
       </li>
-      <!-- end Permission -->
 
       <!-- Comand -->
       <li if.bind="router.currentInstruction.config.name === 'web-pages'">
-        <div class="label">Comand</div>
-        <div class="panel_comand">
-          <div class="comand">Anteprima</div>
-          <div class="comand">Copia Url</div>
+        <div class="title">Comand</div>
+        <div class="comand">
+          <button>
+            <span class="preview">Anteprima</span>
+          </button>
+          <button>
+            <span class="copy_url">Copia Url</span>
+          </button>
         </div>
       </li>
-      <!-- end Comand -->
 
     </ul>
   </div>
@@ -73,28 +64,24 @@
   <!-- Layout -->
   <div class="panel_section">
     <h3>Layout</h3>
-    <ul class="section">
+    <ul>
 
-      <!-- Modello -->
+      <!-- Models -->
       <li if.bind="router.currentInstruction.config.name === 'web-pages'">
-        <div class="label">Modello</div>
-        <div class="data">
-          <div class="models" if.bind="selected">
-            <select>
-              <option repeat.for="model of models" if.bind="model.id === selected.template" value="">${model.label}</option>
-              <option repeat.for="model of models" value="">${model.label}</option>
-            </select>
-          </div>      
+        <div class="title">Modello</div>
+        <div class="info models">
+          <select>
+            <option repeat.for="model of models" if.bind="model.id === selected.template" value="">${model.label}</option>
+            <option repeat.for="model of models" value="">${model.label}</option>
+          </select>  
         </div>
       </li>
-      <!-- end Modello -->
 
       <!-- Campinatura -->
       <li>
-        <div class="label">Campinatura</div>
-        <div class="data">${selected.fieldsetLabel}</div>
+        <div class="title">Campinatura</div>
+        <div class="info">${selected.fieldsetLabel}</div>
       </li>
-      <!-- Campinatura -->
 
     </ul>
   </div>
@@ -103,41 +90,37 @@
   <!-- Modify -->
   <div class="panel_section">
     <h3>Modifiche</h3>
-    <ul class="section">
+    <ul>
 
       <!-- Created at -->
       <li>
-        <div class="label">Creato il</div>
-        <div class="data">${selected.createdDate}</div>
+        <div class="title">Creato il</div>
+        <div class="info">${selected.createdDate}</div>
       </li>
-      <!-- Created at -->
 
       <!-- Created by -->
       <li>
-        <div class="label">Creato da</div>
-        <div class="data">
+        <div class="title">Creato da</div>
+        <div class="info">
           ${selected.createdEditorName}
         </div>
       </li>
-      <!-- Created by -->
 
       <!-- Modified at -->
       <li>
-        <div class="label">Modificato il</div>
-        <div class="data">${selected.modifiedDate}</div>
+        <div class="title">Modificato il</div>
+        <div class="info">${selected.modifiedDate}</div>
       </li>
-      <!-- Modified at -->
 
       <!-- Modified by -->
       <li>
-        <div class="label">Modificato da</div>
-        <div class="data">${selected.modifiedEditorName}</div>
+        <div class="title">Modificato da</div>
+        <div class="info">${selected.modifiedEditorName}</div>
       </li>
-      <!-- Modified by -->
 
        <!-- Permission -->
-       <li>
-        <div class="label">Permessi di modifica</div>
+       <li if.bind="router.currentInstruction.config.name !== 'objects'">
+        <div class="title">Permessi di modifica</div>
         <div class="permissions">
           <div class="permissions_item" repeat.for="editor of editors">
             <input type="checkbox" type="checkbox" checked.bind="permissions(selected, editor, 'editorsGroups')">
@@ -145,28 +128,22 @@
           </div>
         </div>
       </li>
-      <!-- end Permission -->
 
       <!-- Comand -->
-
-      <!-- If web-pages -->
-      <li if.bind="router.currentInstruction.config.name === 'web-pages'">
-        <div class="label">Comand</div>
-        <div class="panel_comand">
-          <div class="comand">Modifica</div>
-          <div class="comand">Crea figlia</div>
-          <div class="comand">Elimina</div>
+      <li>
+        <div class="title">Comandi</div>
+        <div class="comand">
+          <button if.bind="router.currentInstruction.config.name === 'web-pages' || router.currentInstruction.config.name === 'objects'">
+            <span class="modify">Modifica</span>
+          </button>
+          <button if.bind="router.currentInstruction.config.name === 'web-pages'">
+            <span class="create_child">Crea Figlia</span>
+          </button>
+          <button>
+            <span class="delete">Elimina</span>
+          </button>
         </div>
       </li>
-
-      <!-- If groups-objects -->
-      <li if.bind="router.currentInstruction.config.name === 'groups-objects'">
-        <div class="label">Comand</div>
-        <div class="panel_comand">
-          <div class="comand">Elimina</div>
-        </div>
-      </li>
-      <!-- end Comand -->
 
     </ul>
   </div>

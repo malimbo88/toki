@@ -1,42 +1,65 @@
 /* style/partials/_mixin */
 
-/* Button */
-@mixin button {
-  padding: 1.2em 3.2em;
-  text-transform: uppercase;
-  font-size: 0.7em;
-  font-weight: 700;
-  border-radius: 0.5em;
-  box-shadow: 0px 0em 0.15em 0.2em rgba(0, 0, 0, 0.2);
-  font-family: $roboto_font_condensed;
-  border: 0.1em solid #000;
-
-  &:hover {
-    border: 0.1em solid rgba(255, 255, 255, 0.3);
-  }
-
-  &:active, &:focus {
-    outline: none;
-  }
-}
-
 /* Select */
 @mixin select {
   cursor: pointer;
   border: none;
   background-color: inherit;
   font-family: $roboto_font_condensed;
-  font-weight: bold;
-  text-decoration: underline;
+  font-weight: 500;
+  font-size: $font_size;
     
   &:active, &:focus {
     border: none;
     outline: none;
   }
+}
 
-  & > option {
-    font-family: $roboto_font_condensed;
-    font-weight: bold;
-    background-color: $color_label_panel;
+/* Button */
+@mixin button {
+  height: $info_panel_row;
+  line-height: $info_panel_row;
+  background-color: #272727;
+  margin: 0 2px 0 0;
+  border-radius: $panel_border_radius;
+  padding: 0 0.5rem 0 0;
+  align-items: center;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  font-size: $label_icon_font_size;
+  text-transform: uppercase;
+  color: $color_title_info_panel;
+  font-weight: 800;
+  font-family: $roboto_font_condensed;
+  overflow: hidden;
+
+  &:hover {
+    background-color: #303030;
+
+    & > span {
+      color: $color_white_text;
+
+      &:before {
+        background-color: #202020;
+        height: 100%;
+      }
+    }
   }
+}
+
+/* Font awesome */
+@mixin icon {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  font-size: 0.8rem;
+  margin: 0 0.5rem 0 0;
+  -webkit-font-smoothing: antialiased;
+  font-family: "Font Awesome 5 Free"; 
+  font-size: 0.85rem;
+  border-radius: 0 0.6rem 0 0;
+  width: 1.6rem;
+  font-weight: 900;
 }

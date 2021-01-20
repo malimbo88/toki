@@ -10,53 +10,87 @@
       position: absolute; 
       top: 50%;
       left: 50%;
-      width: 300px;
-      height: fit-content;
+      width: $auth_panel_width;
       transform: translate(-50%, -50%);
       background: linear-gradient($color_gradient_bg_1, $color_gradient_bg_2);
       color: $color_white_text;
-      padding: 1.8em 1em;
-      border: 0.4em solid $color_border_auth;
-      border-radius: 0.6em;
+      padding: 0 $auth_gap;
+      border: 4px solid $color_border_auth;
+      box-shadow: 0px 0em 0.5rem 0.2rem rgba(0, 0, 0, 0.2);
+      border-radius: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
 
       .auth_logo {
-        width: 18em;
+        width: $auth_logo;
         margin: 0 auto;
+        margin-top: 0.3rem;
     }
     
     /* Form */
     .login_wrapper {
-      .auth_input {
-        margin-bottom: 1em;
-    
-        & > label {
-          display: block;
-          padding-bottom: 1em;
-        }
+      width: 100%;
 
-        & > input {
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        
+        .auth_input {
+          margin-bottom: $auth_gap;
           width: 100%;
-          height: 2.3em;
-          border: 0.15em solid #fEfEfE;
-          border-radius: 0.2em;
-          background-color: $color_input_auth;
-          padding:0 0.5em;
-          font-family: $roboto_font_condensed;
-    
-          &:active, &:focus{
-            outline: 0;
-            box-shadow: 0px 0em 0.15em 0.2em rgba(2, 143, 202, 0.9);
+      
+          & > label {
+            display: block;
+            margin-bottom: $auth_gap;
+            font-size: $font_size;
+          }
+  
+          & > input {
+            width: 100%;
+            height: 2rem;
+            border: 2px solid $color_white_text;
+            border-radius: $panel_border_radius;
+            background-color: $color_input_auth;
+            padding:0 $panel_gap;
+            font-family: $roboto_font_condensed;
+            font-size: $font_size;
+            font-weight: 800;
+      
+            &:active, &:focus{
+              outline: 0;
+              box-shadow: 0px 0em 0.15rem 0.2rem rgba(2, 143, 202, 0.9);
+              background-color: $color_white_text;
+            }
           }
         }
-      }
-    
-      /* Button */
-      .auth_button {
-        text-align: center;
-      
-        & > button {
-          background: linear-gradient(#303030 30%, #141414 60%);
+
+        /* Button */
+        .auth_button {
+          text-align: center;
+          background: linear-gradient($color_label_title_panel 30%, $color_border_auth 60%);
           color: $color_text;
+          margin-bottom: 1.2rem;
+          width: 5.2rem;
+          height: 2.2rem;
+          text-transform: uppercase;
+          font-size: 0.55rem;
+          font-weight: 800;
+          border-radius: $container_border_radius;
+          box-shadow: 0px 0em 0.5rem 0.1rem rgba(0, 0, 0, 0.5);
+          font-family: $roboto_font_condensed;
+          border: 2px solid #000;
+          cursor: pointer;
+
+          &:hover {
+            border: 1px solid rgba(255, 255, 255, 0.7);
+          }
+
+          &:active, &:focus {
+            outline: none;
+          }
         }
       }
     }

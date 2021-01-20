@@ -9,37 +9,22 @@ export class Auth {
   password = null;
   errorMessage = null;
 
-  /* Constructor */
   constructor(router, api, settings) {
     this.router = router;
     this.api = api;
     this.settings = settings;
   }
 
-  /* Activate */
   activate() {
     this.errorMessage = false;
   }
 
-  /* Login */
   login() {
-
-    /* Data */
-    let data = { 
-      username: this.username, 
-      password: this.password 
-    }
-
-    this.api.post('userLogin', data)
-      
-    /* Xhr */
-    .then(xhr => {
+    let data = { username: this.username, password: this.password };  
+    this.api.post('userLogin', data).then(xhr => {
       this.api.authData = JSON.parse(xhr.response);
       this.router.navigateToRoute('home');
-    })
-    
-    /* Error */
-    .catch(error => {
+    }).catch(error => {
       this.errorMessage = true;
     });
   }

@@ -1,169 +1,239 @@
 @import '../../../style/partials/_variable';
 @import '../../../style/partials/_mixin';
 
-.panel_section {
-  padding: 0.4em;
-  background-color: $color_panel_section;
-  border-radius: 3px;
-  font-weight: bold;
+info-panel {
+  height: 100%;
+  overflow: auto;
 
-  &:not(:last-child) {
-    margin-bottom: 0.4em;
-  }
-
-  & > h3 {
-    font-family: $roboto_font;
-    font-size: 0.7em;
-    text-transform: uppercase;
-    color: $color_background_panel;
-    margin-bottom: 0.5em;
-  }
-    .section {
+  .panel_section {
+    padding: $panel_gap;
+    background-color: $color_panel_section;
+    border-radius: $panel_border_radius;
+    font-weight: 800;
+    
+    &:not(:last-child) {
+      margin-bottom: $panel_gap;
+    }
+  
+    h3 {
+      font-family: $roboto_font;
+      font-size: $h3_font_size;
+      text-transform: uppercase;
+      color: $color_background_panel;
+      margin-bottom: $panel_gap;
+      font-weight: 800;
+    }
+  
+    & > ul {
       list-style: none;
-      padding: 0.4em;
-
-       & > li {
-        margin-bottom: 0.4em;
+      padding: $panel_gap;
+  
+        & > li {
         display: flex;
-
-        /* Panel label */
-        &.panel_label {         
-          .label, .data {
-            height: 5em;
-            line-height: 5em;
-          }
-
-          input {
-            border: none;
-            outline: none;
-            cursor: pointer;
-            font-weight: 800;
-            font-family: $roboto_font_condensed;
-            
-             &::placeholder {
-               color: $color_text;
-               text-decoration: underline;
-             }
-
-             &:active, &:focus {
-               background-color: $color_white_text;
-               &::placeholder {
-                text-decoration: none;
-               }
-             }
-          }
+        list-style: none;
+        height: $info_panel_row;
+        line-height: $info_panel_row;
+  
+        &:not(:last-child) {
+          margin-bottom: $panel_gap;
         }
-
-        .label, .data, .panel_comand {
+  
+        .title, .info, .comand {
           display: inline-block;
-          height: 3em;
-          line-height: 3em;
-          padding: 0 0.4em;
+          padding: 0 $panel_gap;
         }
-
-        /* Label list */
-        .label {
+  
+        .title {
           background-color: $color_label_title_panel;
-          flex-basis: 40%;
-          border-radius: 0.3em;
+          flex-basis: 30%;
+          border-radius: $panel_border_radius;
           text-transform: uppercase;
-          font-size: 0.8em;
+          font-size: $h3_font_size;
           text-align: right;
+          color: $color_title_info_panel;
         }
-
-        /* Data list */
-        .data {
+  
+        .info {
           background-color: $color_label_panel;
-          flex-basis: 60%;
-          margin-left: 0.4em;
-          border-radius: 0.3em;
-          font-size: 0.8em;
+          flex-basis: 70%;
+          margin-left: $panel_gap;
+          border-radius: $panel_border_radius;
+          font-size: $font_size;
+          font-weight: 500;
           display: flex;
           align-items: center;
           overflow: hidden;
-
-          /* Visibility */
-          & .visibility {
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-        
-            & > select {
-              width: 100%;
-              color: $color_text;
-              font-size: 1em;
-              @include select;
-            }
+          color: $color_text;
+  
+          &:not(.url) {
+            text-transform: capitalize;
           }
-            .square {
-              height: 1.6em;
-              width: 1.6em;
-              text-align: right;
-              border-radius: 0.3em;
-
-              &.active {
-                background-color:$color_active;
-              }
-
-              &.inactive {
-                background-color: $color_inactive;
-              }
-            }
-          }
-
-          /* Permissions */
-          .permissions {
-            display: flex;
-
-            & > .permissions_item {
+        }
+  
+        /* Label */
+        &.label { 
+          height: $label_height;
+          line-height: $label_height; 
+          
+          & > .info {
+            padding: 0;
+  
+            input {
+              padding-left: $panel_gap;
+              font-family: $roboto_font_condensed;
+              border-radius: $panel_border_radius;
               background-color: $color_label_panel;
-              margin-left: 0.4em;
-              border-radius: 0.3em;
-              font-size: 0.8em;
-              display: flex;
-              padding: 0 0.4em;
-              align-items: center;
-              height: 3em;
-              line-height: 3em;
-
-              & > label {
-                margin-left: 0.4em;
-              }
-            }
-          }
-
-          /* Panel comand */
-          .panel_comand {
-            display: flex;
-
-            & > .comand {
-              background-color: $color_background_panel;
-              margin-left: 0.4em;
-              border-radius: 0.3em;
-              font-size: 0.8em;
-              text-transform: uppercase;
-              padding: 0 0.4em;
-              align-items: center;
-              height: 3em;
-              line-height: 3em;
-
-              &:first-child {
-                margin-left: 0;
-              }
-            }
-          }
-
-          /* Models */
-          & .models {
-            width: 100%;
-        
-            & > select {
-              width: 100%;
               color: $color_text;
-              font-size: 1em;
-              @include select;
+              font-weight: 800;
+              width: 100%;
+              height: 100%;
+              border: none;
+              outline: none;
+              cursor: pointer;
+              
+              &::placeholder {
+                color: $color_text;
+                text-decoration: underline;
+                text-transform: capitalize;
+              }
+  
+              &:active, &:focus {
+                background-color: $color_white_text;
+                color: $color_label_panel;
+  
+                &::placeholder {
+                text-decoration: none;
+                }
+              }
             }
           }
-       }
+        }
+  
+        /* Visibility */
+        .visibility {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      
+          & > select {
+            width: 100%;
+            color: $color_text;
+            font-size: $font_size;
+            text-decoration: underline;
+            text-transform: capitalize;
+            @include select;
+  
+            &.active {
+              color: $color_active;
+
+              & > * {
+                color: $color_text;
+              }
+            }
+            &.inactive {
+              color: $color_inactive;
+
+              & > * {
+                color: $color_text;
+              }
+            }
+          }
+  
+          & > .square {
+            height: 0.9rem;
+            flex-basis: 0.9rem;
+            text-align: right;
+            border-radius: $panel_border_radius;
+  
+            &.active {
+              background-color:$color_active;
+            }
+            &.inactive {
+              background-color: $color_inactive;
+            }
+          }
+        }
+  
+        /* Permissions */
+        .permissions {
+          display: flex;
+          height: $info_panel_row;
+          line-height: $info_panel_row;
+          margin-left: $panel_gap;
+  
+          & > .permissions_item {
+            background-color: $color_label_panel;
+            border-radius: $panel_border_radius;
+            margin-right: 2px;
+            padding: 0 $panel_gap;
+            display: flex;
+            align-items: center;
+            min-width: 4.5rem;
+  
+            & > label {
+              font-family: $roboto_font_condensed;
+              font-size: 0.65rem;
+              font-weight: 500;
+              margin-left: $panel_gap;
+              cursor: pointer;
+            }
+          }
+        }
+  
+        /* Comand */
+        .comand {
+          display: flex;
+  
+          & > button {
+            @include button;
+  
+            &:first-child {
+              margin-left: 0;
+            }
+  
+            & > span {
+              &:before {
+                @include icon; 
+              }
+              &.copy_url:before {
+                content: "\f815";
+                color: rgb(204, 51, 153, 0.6);
+              }
+              &.preview:before {
+                content: "\f0c5";
+                color: rgb(77, 195, 255, 0.6);
+              }
+              &.modify:before {
+                content: "\f044";
+                color: rgb(119, 179, 0, 0.5);
+              }
+              &.create_child:before {
+                content: "\f65e";
+                color: rgb(255, 204, 0, 0.6);
+              }
+              &.delete:before {
+                content: "\f2ed";
+                color: rgba(204, 0, 0, 0.5);
+              }
+            }
+          }
+        }
+  
+        /* Models */
+        .models {
+          width: 100%;
+      
+          & > select {
+            width: 100%;
+            color: $color_text;
+            font-size: 1em;
+            text-transform: capitalize;
+            text-decoration: underline;
+            @include select;
+          }
+        }
+      }
     }
+  }
 }

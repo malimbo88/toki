@@ -2,38 +2,111 @@
 
 .panel {
   background: $color_background_panel;
-  border: 0.4em solid $color_background_panel;
-  border-radius: 0.4em;
-  height: 100%;
+  border: $panel_gap solid $color_background_panel;
+  border-radius: $container_border_radius;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - #{$nav_height} - #{$page_title_heigth} - (#{$panel_gap} * 1.5));
 
   &.right {
     margin-left: $panel_gap;
   }
 
-  .panel_row_text {
+  & > h2 {
     background-color: $color_label_title_panel;
-    border-radius: 0.3em;
-    padding:0 0.4em;
+    border-radius: $panel_border_radius;
+    padding:0 $panel_gap;
     height: $panel_row_height;
     line-height: $panel_row_height;
-    margin-bottom: $panel_row_mb;
+    font-family: $roboto_font;
+    text-transform: uppercase;
+    color: $color_white_text;
+    font-size: $h2_font_size;
+    margin-bottom: $panel_gap;
+  }
 
-    & > h2 {
-      font-family: $roboto_font;
-      text-transform: uppercase;
-      color: $color_white_text;
-      font-size: 0.8em;
+  /* Languages */
+  select {
+    width: 100%;
+    color: $color_text;
+    font-size: $h2_font_size;
+    @include select;
+
+    &.languages, &.obj_groups_sel {
+      background-color: $color_label_panel;
+      margin-bottom: $panel_gap;
+      border-radius: $panel_border_radius;
+      padding:0 $panel_gap;
+      height: $panel_row_height;
+      line-height: $panel_row_height;
     }
   }
 
-  .languages {
-    background-color: $color_label_panel;
+  /* List footer */
+  .list_footer {
+    background-color: $color_panel_section;
+    border-radius: $panel_border_radius;
+    padding:0 0.5rem;
+    height: $panel_list_buttons;
+    line-height: $panel_list_buttons;
+    margin-top: $panel_gap;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+ 
+    & > button {
+      @include button;
 
-    & > select {
-      width: 100%;
+      &:first-child {
+        margin-left: 0;
+      }
+
+      & > span {
+        &:before {
+          @include icon; 
+        }
+        &.create:before {
+          content: "\f0fe";
+        }
+      }
+    }
+  }
+
+  /* Object groups */
+  .obj_groups {
+    list-style: none;
+
+    & > li {
+      background-color: $color_panel_section;
+      border-radius: $panel_border_radius;
+      height: 2.1rem;
+      line-height: 2.1rem;
+      margin-bottom: 1.5px;
+      text-decoration: none;
+      font-family: $roboto_font;
+      text-transform: capitalize;
       color: $color_text;
-      font-size: 1em;
-      @include select;
+      font-size: $h3_font_size;
+      display: flex; 
+      overflow: hidden;
+      cursor: pointer;
+
+      .obj_group_id {
+        background-color: $color_label_title_panel;
+        width: 2.2rem;
+        border-radius: 0 0.6rem 0 0;
+        text-align: center;
+        margin-right: 0.5rem;
+      }
+
+      &:hover {
+        background-color: rgba(200, 200, 200, 0.3);
+
+        & > .obj_group_id {
+          background-color:rgb(30, 30, 30, 0.3);
+        }
+      }
     }
   }
 }

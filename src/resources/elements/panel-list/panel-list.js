@@ -7,8 +7,9 @@ import {Api} from '../../../services/api';
 export class PanelList {
   @bindable() type;
   @bindable() parent;
+  @bindable() fieldset;
+  @bindable({defaultBindingMode: bindingMode.twoWay}) records = null;
   @bindable({defaultBindingMode: bindingMode.twoWay}) selected = null;
-  records = null;
 
   constructor(router, api) {
     this.router = router;
@@ -22,22 +23,25 @@ export class PanelList {
     } else if (this.type === "2") {
       // Deve caricare i gruppi di oggetti
       this.load();
-    } else if (this.type === "3" && this.fieldset) {
+    } else if (this.type === "3") {
+      this.load();
       // Deve caricare gli oggetti, con colonne personalizzate
+      /*
       this.api.post('getFields', { fieldset: this.fieldset, intable: true }).then(xhr => {
         let response = JSON.parse(xhr.response);
         this.fields = response;
       });
+      */
     } else {
       this.records = [];
     }  
   }
 
   load() {
-    this.api.post('getContentItems', { type: this.type, parent: this.parent }).then(xhr => {
+    let data = { type: this.type, parent: this.parent, limit: 100 };
+    this.api.post('getContentItems', data).then(xhr => {
       let response = JSON.parse(xhr.response);
       this.records = response;
-      console.log(this.records)
     });
   }
 

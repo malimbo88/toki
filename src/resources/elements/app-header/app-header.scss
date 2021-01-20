@@ -6,24 +6,24 @@ header {
   display: flex;
   justify-content: space-between;
 
-  & > .header_logo {
-    width: 8.5em;
+  .header_logo {
+    width: $logo_width;
     height: 100%;
   }
 
-  & > .nav_header {
-    & > .header_menu {
+  nav {
+    ul {
       list-style: none;
 
       & > li {
-        line-height: 2.2em;
+        line-height: 2rem;
         display: inline-block;
-        padding:0 1em;
-        border-radius: 0 0 3px 3px;
-        background: linear-gradient(#404040 30%, $color_label_title_panel 70%);
-        border: 0.1em solid rgba(255, 255, 255, 0.03);
+        padding:0 1rem;
+        border-radius: 0 0 $panel_border_radius $panel_border_radius;
+        background: linear-gradient($color_panel_section 30%, $color_label_title_panel 70%);
+        border: 1.5px solid rgba(255, 255, 255, 0.05);
         border-top: none;
-        margin-left: 0.2em;
+        margin-left: $nav_items_margin;
         position: relative;
 
         & > a, & > span {
@@ -31,18 +31,17 @@ header {
           color: $color_text;
           cursor: pointer;
           text-decoration: none;
-          font-size: 0.7em;
-          font-weight: 800;
+          font-size: $header_nav_font_size;
           text-transform: uppercase;
         }
 
         &:hover {
           background: linear-gradient(#028FCA 10%, #8dd1dc 90%);
-          height: 2.6em;
+          height: 2.25rem;
 
           & > a, & > span {
             display: inline-block;
-            transform: translate(0, 0.3em);
+            transform: translate(0, 0.15rem);
             color: $color_white_text;
           }
         }

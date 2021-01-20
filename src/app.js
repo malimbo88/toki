@@ -1,6 +1,6 @@
 import {PLATFORM} from 'aurelia-pal';
 import {inject} from 'aurelia-framework';
-import {Api} from './services/api'
+import {Api} from './services/api';
 
 @inject(Api)
 export class App {

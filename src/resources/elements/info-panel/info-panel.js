@@ -8,17 +8,19 @@ import {Settings} from '../../../services/settings';
 export class InfoPanel {
   @bindable({defaultBindingMode: bindingMode.twoWay}) selected = null;
 
-  /* Constructor */
   constructor(router, settings) {
     this.settings = settings;
     this.router = router;
-    this.languages = JSON.parse(this.settings.data.languages);
-    this.models = JSON.parse(this.settings.data.templates);
-    this.visitors = JSON.parse(this.settings.data.visitorsGroups);
-    this.editors = JSON.parse(this.settings.data.editorsGroups);
+    
   }
 
-  /* Permissions */
+  attached() {
+    this.languages = this.settings.data.languages;
+    this.models = this.settings.data.templates;
+    this.visitors = this.settings.data.visitorsGroups;
+    this.editors = this.settings.data.editorsGroups;
+  }
+
   permissions(selected, visitor, data) {
     let flag = false;
     if (selected) {

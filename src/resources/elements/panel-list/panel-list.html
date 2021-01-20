@@ -5,8 +5,8 @@
   <p if.bind="records.length === 0">Nessun record presente</p>
 
   <!-- Table -->
-  <table class="${type === '2' ? 'type_2' : ''}" if.bind="records.length">
-    <thead if.bind="type === '2'">
+  <table if.bind="records.length">
+    <thead>
       <tr>
         <th class="id">ID</th>
         <th>Label</th>
@@ -14,12 +14,8 @@
     </thead>
     <tbody>
       <tr repeat.for="record of records" click.delegate="select(record)" data-selected.bind="selected === record">
-        <td class="type_2" if.bind="type === '2'">
-          <span>${record.id}</span>
-        </td>
+        <td>${record.id}</td>
         <td>${record.data.label}</td>
-        <td class="parent" if.bind="type === '1'">P:0 S:0</td>
-        <td if.bind="type === '1'">${record.id}</td>
       </tr>
     </tbody>
   </table>

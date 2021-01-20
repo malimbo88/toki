@@ -1,2 +1,41 @@
 <template>
-</template>
+    <require from="./visitors.scss"></require>
+    <h1>Visitatori</h1>
+
+    <!-- Content wrapper -->
+    <div class="content_wrapper visitors">
+
+      <!-- Left panel -->
+      <div class="panel left">
+        <h2>Gruppi</h2>
+        <simple-list type="tableStandard" records.bind="groups"></simple-list>
+
+        <!-- List footer -->
+        <div class="list_footer">
+          <button>
+            <span class="create">Crea</span>
+          </button>
+        </div>
+
+      </div>
+      <!-- end Left panel -->
+
+      <!-- Right panel -->
+      <div class="panel right">
+        <h2>Utenti</h2>
+        <simple-list type="tableUsers" records.bind="users"></simple-list>
+        
+        <!-- List footer -->
+        <div class="list_footer">
+          <button>
+            <span class="create">Crea</span>
+          </button>
+        </div>
+
+      </div>
+      <!-- Right panel -->
+
+    </div> 
+    <!-- end Content wrapper -->
+  
+  </template>
