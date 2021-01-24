@@ -7,6 +7,7 @@ import {Settings} from '../../services/settings';
 export class Objects {
   selected = null;
   objectGroups = [];
+  selectedObject = null;
   
   /* Constructor */
   constructor(router, api, settings) {
@@ -24,8 +25,7 @@ export class Objects {
   }
 
   selectObjectGroup(record) {
-    this.parent = record.id;
-    this.fieldset = record.fieldset;
+    this.parent = record;
   }
 
   select(record) {

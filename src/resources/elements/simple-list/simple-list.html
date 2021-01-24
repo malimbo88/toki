@@ -13,12 +13,12 @@
       </tr>
     </thead>
     <tbody>
-      <tr repeat.for="record of records">
+      <tr repeat.for="record of records" click.delegate="select(record)" data-selected.bind="selected === record">
         <td>${record.id}</td>
-        <td if.bind="type === 'tableStandard'">${record.label}</td>
-        <td if.bind="type === 'tableUsers'">${record.name}</td>
-        <td if.bind="type === 'tableAssetsCss'">${record.label}.css</td>
-        <td if.bind="type === 'tableAssetsJs'">${record.label}.js</td>
+        <td if.bind="type.substring(0, 8) === 'standard'">${record.label}</td>
+        <td if.bind="type.substring(0, 5) === 'users'">${record.name}</td>
+        <td if.bind="type === 'assetsCss'">${record.label}.css</td>
+        <td if.bind="type === 'assetsJs'">${record.label}.js</td>
       </tr>
     </tbody>
   </table>

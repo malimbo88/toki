@@ -1,3 +1,6 @@
+@import '../../style/partials/_variable';
+@import '../../style/partials/_mixin';
+
 .groups_objects {
   & > .panel.left {
     width: 50%;
@@ -5,4 +8,8 @@
   & > .panel.right {
     width: 50%;
   }
+}
+
+.groups_objects panel-list {
+  max-height: calc(100vh - #{$nav_height} - #{$page_title_heigth} - (#{$panel_gap} * 1.5) - ((#{$panel_row_height} * 2) + (#{$panel_gap}) * 5) - #{$panel_list_buttons});
 }

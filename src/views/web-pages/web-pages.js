@@ -6,6 +6,7 @@ import {Settings} from '../../services/settings';
 @inject(Router, Api, Settings)
 export class Index {
   selected = null;
+  status = null;
   type = null;
   languages = null;
   

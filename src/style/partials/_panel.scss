@@ -47,29 +47,19 @@
   .list_footer {
     background-color: $color_panel_section;
     border-radius: $panel_border_radius;
-    padding:0 0.5rem;
+    padding:0 $padding_row_buttons;
     height: $panel_list_buttons;
     line-height: $panel_list_buttons;
     margin-top: $panel_gap;
     display: flex;
-    justify-content: flex-end;
     align-items: center;
- 
+
+    & > button:first-child {
+      margin-right: auto;
+    }
+
     & > button {
       @include button;
-
-      &:first-child {
-        margin-left: 0;
-      }
-
-      & > span {
-        &:before {
-          @include icon; 
-        }
-        &.create:before {
-          content: "\f0fe";
-        }
-      }
     }
   }
 
@@ -82,7 +72,7 @@
       border-radius: $panel_border_radius;
       height: 2.1rem;
       line-height: 2.1rem;
-      margin-bottom: 1.5px;
+      margin-bottom: 0.13rem;
       text-decoration: none;
       font-family: $roboto_font;
       text-transform: capitalize;

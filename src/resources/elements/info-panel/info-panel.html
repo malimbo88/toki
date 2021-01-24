@@ -10,26 +10,26 @@
       <li class="label">
         <div class="title">Label</div>
         <div class="info">
-          <input if.bind="selected" type="text" placeholder="${selected.data.label}">
+          <input if.bind="selected" type="text" value.bind="selected.label" change.delegate="change('label')">
         </div>
       </li>
 
       <!-- Url -->
       <li if.bind="router.currentInstruction.config.name === 'web-pages'">
         <div class="title">Url</div>
-        <div class="info url">${selected.data.url}</div>
+        <div if.bind="!urlChanged" class="info url">${selected.url}</div>
+        <div if.bind="urlChanged" class="info url">${urlChanged}</div>
       </li>
 
       <!-- Visibility -->
       <li if.bind="router.currentInstruction.config.name !== 'groups-objects'">
         <div class="title">Visibilità</div>
         <div class="info visibility">
-          <select class="${selected.status === 'visible' ? 'active' : 'inactive'}" if.bind="selected">
-            <option value="${selected.status}">${selected.status}</option>
-            <option value="${selected.status}">Attivo</option>
-            <option value="${selected.status}">Inattivo</option>
+          <select class="${selectedStatus === 'visible' || selected.status === 'visible' ? 'active' : 'inactive'}" if.bind="selected" value.bind="selectedStatus" change.delegate="change('status')">
+            <option repeat.for="statusOption of statusOptions" value="${statusOption}" if.bind="selected.status === statusOption">${statusOption}</option>
+            <option repeat.for="statusOption of statusOptions" value="${statusOption}" if.bind="selected.status !== statusOption">${statusOption}</option>
           </select>
-          <div if.bind="selected" class="square ${selected.status === 'visible' ? 'active' : 'inactive'}"></div>
+          <div class="square ${selectedStatus === 'visible' || selected.status === 'visible' ? 'active' : 'inactive'}" if.bind="selected"></div>
         </div>
       </li>
 

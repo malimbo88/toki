@@ -14,12 +14,21 @@
             <option repeat.for="lang of settings.data.languages" model.bind="lang.id">${lang.label}</option>
           </select>
   
-          <simple-list type="tableStandard" records.bind="groups"></simple-list>
+          <simple-list type="standardLayout" selected.bind="selectedTemplate"></simple-list>
   
           <!-- List footer -->
           <div class="list_footer">
             <button>
               <span class="create">Crea</span>
+            </button>
+            <button if.bind="selectedTemplate">
+              <span class="create_child">Modifica</span>
+            </button>
+            <button if.bind="selectedTemplate">
+              <span class="modify">Modifica</span>
+            </button>
+            <button if.bind="selectedTemplate">
+              <span class="delete">Elimina</span>
             </button>
           </div>
   
@@ -29,12 +38,18 @@
         <!-- Center panel -->
         <div class="panel right">
           <h2>Fogli di stile</h2>
-          <simple-list type="tableAssetsCss" records.bind="assetsCss"></simple-list>
+          <simple-list type="assetsCss" selected.bind="selectedStylesheet"></simple-list>
 
           <!-- List footer -->
           <div class="list_footer">
             <button>
               <span class="create">Crea</span>
+            </button>
+            <button if.bind="selectedStylesheet">
+              <span class="modify">Modifica</span>
+            </button>
+            <button if.bind="selectedStylesheet">
+              <span class="delete">Elimina</span>
             </button>
           </div>
 
@@ -44,12 +59,18 @@
         <!-- Right panel -->
         <div class="panel right">
           <h2>Javascript</h2>
-          <simple-list type="tableAssetsJs" records.bind="assetsJs"></simple-list>
+          <simple-list type="assetsJs" selected.bind="selectedJavascript"></simple-list>
   
           <!-- List footer -->
           <div class="list_footer">
             <button>
               <span class="create">Crea</span>
+            </button>
+            <button if.bind="selectedJavascript">
+              <span class="modify">Modifica</span>
+            </button>
+            <button if.bind="selectedJavascript">
+              <span class="delete">Elimina</span>
             </button>
           </div>
   

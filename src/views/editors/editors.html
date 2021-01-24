@@ -9,12 +9,18 @@
       <div class="panel left">
         <h2>Gruppi</h2>
           
-        <simple-list type="tableStandard" records.bind="groups"></simple-list>
+        <simple-list type="standardEditors" selected.bind="selectedEditorsGroup"></simple-list>
 
         <!-- List footer -->
         <div class="list_footer">
           <button>
             <span class="create">Crea</span>
+          </button>
+          <button if.bind="selectedEditorsGroup">
+            <span class="modify">Modifica</span>
+          </button>
+          <button if.bind="selectedEditorsGroup">
+            <span class="delete">Elimina</span>
           </button>
         </div>
 
@@ -24,12 +30,18 @@
       <!-- Right panel -->
       <div class="panel right">
         <h2>Utenti</h2>
-        <simple-list type="tableUsers" records.bind="users"></simple-list>
+        <simple-list type="usersEdi" selected.bind="selectedUser"></simple-list>
       
         <!-- List footer -->
         <div class="list_footer">
           <button>
             <span class="create">Crea</span>
+          </button>
+          <button if.bind="selectedUser">
+            <span class="modify">Modifica</span>
+          </button>
+          <button if.bind="selectedUser">
+            <span class="delete">Elimina</span>
           </button>
         </div>
 

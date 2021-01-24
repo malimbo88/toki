@@ -5,20 +5,48 @@
   <p if.bind="records.length === 0">Nessun record presente</p>
 
   <!-- Table -->
-  <table if.bind="records.length">
-    <thead>
-      <tr>
-        <th class="id">ID</th>
-        <th>Label</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr repeat.for="record of records" click.delegate="select(record)" data-selected.bind="selected === record">
-        <td>${record.id}</td>
-        <td>${record.data.label}</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="table_wrapper">
+    <table if.bind="records.length">
+      <thead>
+        <tr>
+          <th class="id">ID</th>
+          <th if.bind="!fields">Label</th>
+          <th if.bind="fields" repeat.for="field of fields">${field.label}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr repeat.for="record of records" click.delegate="select(record)" data-selected.bind="selected === record">
+          <td>
+            <span>${record.id}</span>
+          </td>
+          <td>${record.label}</td>
+          <td repeat.for="field of fields" if.bind="fields && field.label != 'label'">${record[field.label]}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
   <!-- end Table -->
+
+  <!-- Pagination -->
+  <div class="pagination_wrapper">
+    <div class="pagination" if.bind="pagination">
+      <button class="paginate_up" click.delegate="paginate('up')">
+        <i class="fas fa-angle-double-left"></i>
+      </button>
+  
+      <!-- Select limit value -->
+      <div class="paginate_status">${limit} righe per pagina / Pagina ${page} di ${pages}</div>
+      <select value.bind="limit">
+        <option value.bind="25">25</option>
+        <option value.bind="50">50</option>
+        <option value.bind="100">100</option>
+        <option value.bind="200">200</option>
+      </select>
+  
+      <button class="paginate_down" click.delegate="paginate('down')">
+        <i class="fas fa-angle-double-right"></i>
+      </button>
+    </div>
+  </div>
 
 </template>

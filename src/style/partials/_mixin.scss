@@ -34,6 +34,40 @@
   font-family: $roboto_font_condensed;
   overflow: hidden;
 
+  &:first-child {
+    margin-left: 0;
+  }
+
+  & > span {
+    &:before {
+      @include icon; 
+    }
+    &.copy_url:before {
+      content: "\f0c5";
+      color: rgb(204, 51, 153, 0.6);
+    }
+    &.preview:before {
+      content: "\f2d2";
+      color: rgb(77, 195, 255, 0.6);
+    }
+    &.modify:before {
+      content: "\f044";
+      color: rgb(119, 179, 0, 0.5);
+    }
+    &.create_child:before {
+      content: "\f65e";
+      color: rgb(255, 204, 0, 0.6);
+    }
+    &.delete:before {
+      content: "\f2ed";
+      color: rgba(204, 0, 0, 0.5);
+    }
+    &.create:before {
+      content: "\f35d";
+      color: rgba(51, 153, 51, 0.6);
+    }
+  }
+
   &:hover {
     background-color: #303030;
 
