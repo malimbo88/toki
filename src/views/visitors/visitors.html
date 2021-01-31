@@ -5,41 +5,79 @@
     <!-- Content wrapper -->
     <div class="content_wrapper visitors">
 
-      <!-- Left panel -->
+      <!-- Left panel (Groups) -->
       <div class="panel left">
         <h2>Gruppi</h2>
-        <simple-list type="standardVisitors" selected.bind="selectedVisitorsGroup"></simple-list>
-
+        <panel-list view-model.ref="listVisitorsGroups" type="visitorsGroups" parent="0" selected.bind="selectedGroup"></panel-list>
+        
         <!-- List footer -->
         <div class="list_footer">
-          <button>
+
+          <!-- Input -->
+          <input if.bind="changeGroup" type="text" value.bind="selectedGroup.label">
+
+          <!-- Buttons -->
+          <button if.bind="!changeGroup" click.delegate="create('selectedGroup')">
             <span class="create">Crea</span>
           </button>
-          <button if.bind="selectedVisitorsGroup">
+          <button if.bind="selectedGroup.id && !changeGroup" click.delegate="changeGroup = true">
             <span class="modify">Modifica</span>
           </button>
-          <button if.bind="selectedVisitorsGroup">
+          <button if.bind="selectedGroup.id && !changeGroup" click.delegate="delete('deleteGroup', selectedGroup)">
             <span class="delete">Elimina</span>
+          </button>
+          <button if.bind="changeGroup" click.delegate="saveGroup('createGroup', 'editGroup', selectedGroup)">
+            <span class="save">Salva</span>
+          </button>
+          <button if.bind="changeGroup" click.delegate="changeGroup = false">
+            <span class="cancel">Annulla</span>
           </button>
         </div>
 
       </div>
       <!-- end Left panel -->
 
-      <!-- Right panel -->
+      <!-- Right panel (User) -->
       <div class="panel right">
         <h2>Utenti</h2>
-        <simple-list type="usersVis" selected.bind="selectedUser"></simple-list>
+        <panel-list class="${changeUser ? 'active' : ''}" view-model.ref="listVisitorsUsers" type="visitorsUsers" params.bind="usersParams" fields.bind="[{ label: 'name' }, { label: 'username'}, { label: 'groups'}]" selected.bind="selectedUser"></panel-list>
         
         <!-- List footer -->
-        <div class="list_footer">
-          <button>
+        <div class="list_footer ${changeUser ? 'active' : ''}">
+          <div class="user_change" if.bind="changeUser">
+
+            <!-- Inputs -->
+            <label>Name</label>
+            <input type="text" value.bind="selectedUser.name">
+            <label>Username</label>
+            <input type="text" value.bind="selectedUser.username">
+            <label>New password</label>
+            <input type="text" value.bind="selectedUser.password">
+
+            <!-- Buttons -->
+            <div class="user_buttons">
+              <button click.delegate="saveGroup('createUser', 'editUser', selectedUser)">
+                <span class="save">Salva</span>
+              </button>
+              <button click.delegate="changeUser = false">
+                <span class="cancel">Annulla</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Select -->
+          <select if.bind="changeUser" multiple value.bind="selectedUser.groups">
+            <option if.bind="!selecteUser" repeat.for="group of groups" matcher.bind="selectedUser.groups.includes(group)" model.bind="group">${group.label}</option>
+          </select>
+          
+          <!-- Buttons -->
+          <button class="user_btn ${changeUser ? 'active' : ''}" if.bind="!changeUser" click.delegate="create('selectedUser')">
             <span class="create">Crea</span>
           </button>
-          <button if.bind="selectedUser">
+          <button if.bind="selectedUser.id && !changeUser" click.delegate="changeUser = true">
             <span class="modify">Modifica</span>
           </button>
-          <button if.bind="selectedUser">
+          <button if.bind="selectedUser.id && !changeUser" click.delegate="delete('deleteUser', selectedUser)">
             <span class="delete">Elimina</span>
           </button>
         </div>

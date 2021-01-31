@@ -5,23 +5,49 @@
   <p if.bind="records.length === 0">Nessun record presente</p>
 
   <!-- Table -->
-  <table>
-    <thead>
-      <tr>
-        <th class="id">ID</th>
-        <th>Label</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr repeat.for="record of records" click.delegate="select(record)" data-selected.bind="selected === record">
-        <td>${record.id}</td>
-        <td if.bind="type.substring(0, 8) === 'standard'">${record.label}</td>
-        <td if.bind="type.substring(0, 5) === 'users'">${record.name}</td>
-        <td if.bind="type === 'assetsCss'">${record.label}.css</td>
-        <td if.bind="type === 'assetsJs'">${record.label}.js</td>
-      </tr>
-    </tbody>
-  </table>
+  <div class=table_wrapper>
+    <table>
+      <thead if.bind="typeof type === 'string'" class="id">
+        <tr>
+          <th class="id">ID</th>
+
+          <!-- Th users -->
+          <th if.bind="type !== 'users'">Label</th>
+          <th if.bind="type === 'users'">Name</th>
+          <th if.bind="type === 'users'">Username</th>
+          <th if.bind="type === 'users'">Groups</th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <tr repeat.for="record of records[type]" click.delegate="select(record)" data-selected.bind="selected === record">
+          <td if.bind="type === 'visitorsGroups'">${record.id}</td>
+
+          <!-- Td visitorsGroups -->
+          <td if.bind="type === 'visitorsGroups'">${record.label}</td>
+
+          <!-- Td users -->
+          <td if.bind="type === 'users' && !userGroups">${record.id}</td>
+          <td if.bind="type === 'users' && !userGroups">${record.name}</td>
+          <td if.bind="type === 'users' && !userGroups">${record.username}</td>
+          <td if.bind="type === 'users' && !userGroups">
+            <span repeat.for="group of record.groups">${group.label}</span>
+          </td>
+        </tr>
+
+        <!-- users changed -->
+        <tr if="userGroups" repeat.for="record of userGroups" click.delegate="select(record)" data-selected.bind="selected === record">
+          <td if.bind="type === 'users'">${record.id}</td>
+          <td if.bind="type === 'users'">${record.name}</td>
+          <td if.bind="type === 'users'">${record.username}</td>
+          <td if.bind="type === 'users'">
+            <span repeat.for="group of record.groups">${group.label}</span>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
   <!-- end Table -->
 
 </template>

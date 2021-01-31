@@ -1,0 +1,121 @@
+@import '../../../style/partials/_variable';
+@import '../../../style/partials/_mixin';
+
+form-panel {
+  height: calc(100vh - #{$nav_height} - #{$page_title_heigth} - (#{$panel_gap} * 2));
+  width: 100%;
+  background-color: $color_background_panel;
+  padding: $panel_gap;
+  border-radius: $panel_border_radius;
+
+  & > header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: $form_panel_header_heigth;
+
+    & > ul {
+      height: inherit;
+      list-style: none;
+      display: flex;
+      
+      & > li {
+        line-height: $form_panel_header_heigth;
+        padding:0 0.5rem;
+        text-transform: uppercase;
+        font-family: $roboto_font;
+        font-size: $header_nav_font_size;
+        font-weight: 800;
+        cursor: pointer;
+      }
+
+      &.tab_menu {
+         & > li {
+          background: $color_panel_section;
+          border: 1.5px solid rgba(255, 255, 255, 0.15);
+          margin-right: $panel_gap;
+          border-radius: $panel_border_radius $panel_border_radius 0 0;
+
+          &.active {
+            background: $color_white_text;
+            color: $color_background_panel;
+          }
+         }
+      }
+      &.closing {
+        & > li {
+          background-color: rgb(119, 202, 238, 0.85);
+          color: $color_white_text; 
+          height: calc(#{$form_panel_header_heigth} - #{$panel_gap});
+          line-height: calc(#{$form_panel_header_heigth} - #{$panel_gap});
+          margin-left: $panel_gap;  
+          border-radius: $panel_border_radius;    
+          width: 7rem; 
+          text-align: center;
+
+          &.close {
+            background: #ff4400;
+          }
+
+          &:hover {
+            transform: scale(1, 1.08);
+          }
+        }
+      }
+    }
+  }
+
+  & > main {
+    height: calc(100vh - #{$nav_height} - #{$page_title_heigth} - (#{$panel_gap} * 2) - #{$form_panel_header_heigth} - (#{$panel_gap} * 2));
+    background-color: $color_white_text;
+    padding:$panel_gap $panel_gap;
+
+    .tab_content {
+      margin:0.5rem 0;
+
+      .form_field {
+        margin: 1rem auto;
+        width: 96%;
+
+        & > label {
+          display: block;
+          color: #1997cc;
+          font-size: $font_size;
+          font-family: $roboto_font;
+          text-transform: capitalize;
+          margin-bottom: $panel_gap;
+        }
+
+        & > input, & > textarea {
+          width: 100%;
+          border: 1.5px solid rgba(0, 0, 0, 0.4);
+          border-radius: $panel_border_radius;
+          background-color: #d9d9d9;
+          padding:0 $panel_gap;
+          font-family: $roboto_font;
+          font-size: $font_size;
+          font-weight: 500;
+          color: $color_background_panel;
+        }
+
+        & > input {
+          height: $form_input_heigth;
+          line-height: $form_input_heigth;
+    
+          &:active, &:focus{
+            outline: 0;
+            background-color: $color_white_text;
+          }
+        }
+
+        &.label {
+          & > input {
+            height: $form_input_heigth + 1rem;
+            line-height: $form_input_heigth + 1rem;
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}

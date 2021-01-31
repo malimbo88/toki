@@ -1,0 +1,64 @@
+<template>
+  <require from="./form-panel.scss"></require>
+
+  <!-- Header -->
+  <header>
+    
+    <!-- Tabs menu -->
+    <ul class="tab_menu">
+      <li if.bind="editSelected.id" repeat.for="fieldGroup of fieldGroups" click.delegate="selectTab(fieldGroup.id)" class="${selectedTab === fieldGroup.id ? 'active' : ''}">${fieldGroup.label}</li>
+      <li if.bind="!editSelected.id" class="active">Info</li>
+    </ul>
+    <ul class="closing">
+      <li click.delegate="save()">Save</li>
+      <li class="close" click.delegate="close()">Close</li>
+    </ul>
+
+  </header>
+
+  <!-- Main -->
+  <main>   
+
+    <!-- Tabs modify -->
+    <div if.bind="editSelected.id" repeat.for="fieldGroup of fieldGroups" show.bind="selectedTab === fieldGroup.id" class="tab_content">
+      <template repeat.for="field of fields">
+        <div if.bind="field.fieldgroup === fieldGroup.id" class="form_field">
+          <label>${field.label}</label>
+          <input if.bind="field.type === 'text'" type="text" value.bind="editSelected[field.label]">
+          <textarea if.bind="field.type === 'textarea'" cols="30" rows="10" value.bind="editSelected[field.label]"></textarea>
+        </div>
+      </template>
+    </div>
+
+    <!-- Tabs create child -->
+    <div if.bind="!editSelected.id" class="tab_content">
+      <div class="form_field">
+        <label>Parent</label>
+        <input type="text" value.bind="editSelected.label">
+      </div>
+      <div class="form_field">
+        <label>Label</label>
+        <input type="text" value.bind="newLabel">
+      </div>
+      <div class="form_field">
+        <label>Url</label>
+        <input type="text" value.bind="newLabel ? newLabel + '.xhtml' : ''">
+      </div>
+      <div class="form_field">
+        <label>Fieldset</label>
+        <select value.bind="newFieldset">
+          <option repeat.for="fieldset of fieldsets" model.bind="fieldset.id">${fieldset.label}</option>
+        </select>
+      </div>
+      <div class="form_field">
+        <label>Template</label>
+        <select value.bind="newTemplate">
+          <option repeat.for="template of settings.data.templates" model.bind="template.id">${template.label}</option>
+        </select>
+      </div>
+    </div>
+
+  </main>
+
+</template>
+

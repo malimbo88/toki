@@ -9,6 +9,8 @@ export class PanelList {
   @bindable() type;
   @bindable() parent;
   @bindable() pagination = false;
+  @bindable() fields = null;
+  @bindable() params = {};
   @bindable({defaultBindingMode: bindingMode.twoWay}) selected = null;
   @bindable() limit = 25;
   offset = 0;
@@ -28,49 +30,77 @@ export class PanelList {
     this.load();
   }
 
+  paramsChanged() {
+    this.load();
+  }
+
   limitChanged() {
     this.offset = 0;
     this.load();
   }
 
   load() {
-    let data = { 
-      type: this.type,
-      parent: this.parent.id,
-      language: this.settings.selectedLanguage
-    };
-
-    let promises = [];
-    if (this.pagination) {
-      data.offset = this.offset;
-      data.limit = this.limit; 
-      data.paging = true;
-      data.offset = this.offset;
-      data.intable = true;
-      promises.push(this.api.post('getFields', { fieldset: parseInt(this.parent.fieldset, 10), intable: "true" }).then(xhr => {
-        this.fields = JSON.parse(xhr.response);
-      }));
-    }
-
-    Promise.all(promises).then(success => {
-      this.api.post('getContentItems', data).then(xhr => {
-        let response = JSON.parse(xhr.response);
-        
-        if (this.pagination) {
-          this.total = response.total;
-          this.count = response.count;
-          this.pages = parseInt(response.pages, 10);
-          this.records = response.items;
-          this.page = Math.ceil(this.pages - ((this.total - this.offset) / parseInt(this.limit, 10)));
-        } else {
-          response.forEach(item => {
-            item = Object.assign(item, item.data);
-            delete(item.data);
-          });
-          this.records = response;
-        }
+    if (['1', '2', '3'].includes(this.type)) {
+      let data = { 
+        type: this.type,
+        parent: this.parent.id,
+        language: this.settings.selectedLanguage
+      };
+  
+      let promises = [];
+      if (this.pagination) {
+        data.offset = this.offset;
+        data.limit = this.limit; 
+        data.paging = true;
+        data.offset = this.offset;
+        data.intable = true;
+        promises.push(this.api.post('getFields', { fieldset: parseInt(this.parent.fieldset, 10), intable: "true" }).then(xhr => {
+          this.fields = JSON.parse(xhr.response);
+        }));
+      }
+      Promise.all(promises).then(success => {
+        this.api.post('getContentItems', data).then(xhr => {
+          let response = JSON.parse(xhr.response);
+          
+          if (this.pagination) {
+            this.total = response.total;
+            this.count = response.count;
+            this.pages = parseInt(response.pages, 10);
+            this.records = response.items;
+            this.page = Math.ceil(this.pages - ((this.total - this.offset) / parseInt(this.limit, 10)));
+          } else {
+            response.forEach(item => {
+              item = Object.assign(item, item.data);
+              delete(item.data);
+            });
+            this.records = response;
+          }
+        });
       });
-    });
+    } else if (this.type === 'visitorsGroups') {
+      this.api.post('getVisitorsGroups', { everybody: false }).then(xhr => {
+        let response = JSON.parse(xhr.response);
+        this.records = response;
+      });
+    } else if (this.type === 'visitorsUsers') {
+      this.api.post('getUsers', this.params || { type: 2, group: false }).then(xhr => {
+        let response = JSON.parse(xhr.response);
+        this.records = response;
+      });
+    } else if (this.type === 'editorsGroups') {
+      this.api.post('getEditorsGroups', { everybody: false }).then(xhr => {
+        let response = JSON.parse(xhr.response);
+        this.records = response;
+      });
+    } else if (this.type === 'editorsUsers') {
+      this.api.post('getUsers', this.params || { type: 2, group: false }).then(xhr => {
+        let response = JSON.parse(xhr.response);
+        response.forEach(item => {
+          item.groups = item.groups.map(x => x = x.label).join(', ');
+        });
+        this.records = response;
+      });
+    }
   }
 
   select(record) {

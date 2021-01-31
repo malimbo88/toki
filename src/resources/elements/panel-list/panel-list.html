@@ -7,7 +7,7 @@
   <!-- Table -->
   <div class="table_wrapper">
     <table if.bind="records.length">
-      <thead>
+      <thead if.bind="type !== '1'">
         <tr>
           <th class="id">ID</th>
           <th if.bind="!fields">Label</th>
@@ -16,11 +16,13 @@
       </thead>
       <tbody>
         <tr repeat.for="record of records" click.delegate="select(record)" data-selected.bind="selected === record">
-          <td>
-            <span>${record.id}</span>
+          <td if.bind="['1', '2', '3'].includes(type)" class="id_label"><span>${record.id}</span></td>
+          <td if.bind="!['1', '2', '3'].includes(type)">${record.id}</td>
+          <td if.bind="!fields">${record.label}</td>
+          <td repeat.for="field of fields" if.bind="fields && field.label !== 'groups'">${record[field.label]}</td>
+          <td repeat.for="field of fields" if.bind="fields && field.label === 'groups'">
+            <span repeat.for="group of record[field.label]">${group.label} </span>
           </td>
-          <td>${record.label}</td>
-          <td repeat.for="field of fields" if.bind="fields && field.label != 'label'">${record[field.label]}</td>
         </tr>
       </tbody>
     </table>
@@ -28,8 +30,8 @@
   <!-- end Table -->
 
   <!-- Pagination -->
-  <div class="pagination_wrapper">
-    <div class="pagination" if.bind="pagination">
+  <div class="pagination_wrapper" if.bind="pagination">
+    <div class="pagination">
       <button class="paginate_up" click.delegate="paginate('up')">
         <i class="fas fa-angle-double-left"></i>
       </button>

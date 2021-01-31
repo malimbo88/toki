@@ -10,24 +10,22 @@
       <li class="label">
         <div class="title">Label</div>
         <div class="info">
-          <input if.bind="selected" type="text" value.bind="selected.label" change.delegate="change('label')">
+          <input if.bind="selected" type="text" value.bind="selected.label" change.delegate="update('label')">
         </div>
       </li>
 
       <!-- Url -->
       <li if.bind="router.currentInstruction.config.name === 'web-pages'">
         <div class="title">Url</div>
-        <div if.bind="!urlChanged" class="info url">${selected.url}</div>
-        <div if.bind="urlChanged" class="info url">${urlChanged}</div>
+        <div class="info url">${selected.url}</div>
       </li>
 
       <!-- Visibility -->
       <li if.bind="router.currentInstruction.config.name !== 'groups-objects'">
         <div class="title">Visibilità</div>
         <div class="info visibility">
-          <select class="${selectedStatus === 'visible' || selected.status === 'visible' ? 'active' : 'inactive'}" if.bind="selected" value.bind="selectedStatus" change.delegate="change('status')">
-            <option repeat.for="statusOption of statusOptions" value="${statusOption}" if.bind="selected.status === statusOption">${statusOption}</option>
-            <option repeat.for="statusOption of statusOptions" value="${statusOption}" if.bind="selected.status !== statusOption">${statusOption}</option>
+          <select class="${selected.status === 'visible' ? 'visible' : selected.status === 'invisible' ? 'invisible' : selected.status === 'disabled' ? 'disabled' : ''}" if.bind="selected" value.bind="selected.status" change.delegate="update('status')">
+            <option repeat.for="statusOption of statusOptions" value="${statusOption}">${statusOption}</option>
           </select>
           <div class="square ${selectedStatus === 'visible' || selected.status === 'visible' ? 'active' : 'inactive'}" if.bind="selected"></div>
         </div>
@@ -37,21 +35,18 @@
       <li if.bind="router.currentInstruction.config.name === 'web-pages'">
         <div class="title">Permessi di visibilità</div>
         <div class="permissions">
-          <div class="permissions_item" repeat.for="visitor of visitors">
-            <input type="checkbox" type="checkbox" checked.bind="permissions(selected, visitor, 'visitorsGroups')">
-            <label>${visitor.label}</label>
+          <div if.bind="selected" class="permissions_item" repeat.for="visitor of selected._visitorsGroups">
+            <input id="formVisitors${$index}" type="checkbox" checked.bind="visitor.checked" change.delegate="update('visitorsGroups')">
+            <label for="formVisitors${$index}">${visitor.label}</label>
           </div>
         </div>
       </li>
 
-      <!-- Comand -->
+      <!-- Command -->
       <li if.bind="router.currentInstruction.config.name === 'web-pages'">
         <div class="title">Comand</div>
-        <div class="comand">
-          <button>
-            <span class="preview">Anteprima</span>
-          </button>
-          <button>
+        <div if.bind="selected" class="comand">
+          <button click.delegate="copyUrl(selected.url)">
             <span class="copy_url">Copia Url</span>
           </button>
         </div>
@@ -70,9 +65,8 @@
       <li if.bind="router.currentInstruction.config.name === 'web-pages'">
         <div class="title">Modello</div>
         <div class="info models">
-          <select>
-            <option repeat.for="model of models" if.bind="model.id === selected.template" value="">${model.label}</option>
-            <option repeat.for="model of models" value="">${model.label}</option>
+          <select if.bind="selected" value.bind="selected.template" change.delegate="update('template')">
+            <option repeat.for="model of models" value="${model.id}">${model.label}</option>
           </select>  
         </div>
       </li>
@@ -122,8 +116,8 @@
        <li if.bind="router.currentInstruction.config.name !== 'objects'">
         <div class="title">Permessi di modifica</div>
         <div class="permissions">
-          <div class="permissions_item" repeat.for="editor of editors">
-            <input type="checkbox" type="checkbox" checked.bind="permissions(selected, editor, 'editorsGroups')">
+          <div if.bind="selected" class="permissions_item" repeat.for="editor of selected._editorsGroups">
+            <input type="checkbox" checked.bind="editor.checked" change.delegate="update('editorsGroups')" disabled.bind="editor.disabled">
             <label>${editor.label}</label>
           </div>
         </div>
@@ -132,15 +126,15 @@
       <!-- Comand -->
       <li>
         <div class="title">Comandi</div>
-        <div class="comand">
-          <button if.bind="router.currentInstruction.config.name === 'web-pages' || router.currentInstruction.config.name === 'objects'">
+        <div if.bind="selected" class="comand">
+          <button if.bind="router.currentInstruction.config.name === 'web-pages' || router.currentInstruction.config.name === 'objects'" click.delegate="edit(selected)">
             <span class="modify">Modifica</span>
           </button>
-          <button if.bind="router.currentInstruction.config.name === 'web-pages'">
+          <button if.bind="router.currentInstruction.config.name === 'web-pages'" click.delegate="new(selected)">
             <span class="create_child">Crea Figlia</span>
           </button>
-          <button>
-            <span class="delete">Elimina</span>
+          <button click.delegate="delete(selected)">
+            <span class="delete" click.deleagate="delete()">Elimina</span>
           </button>
         </div>
       </li>

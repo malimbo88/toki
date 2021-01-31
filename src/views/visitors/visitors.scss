@@ -3,13 +3,17 @@
 
 .visitors {
   & > .panel.left {
-    width: 40%;
+    width: 35%;
   }
   & > .panel.right {
-    width: 60%;
+    width: 65%;
   }
 }
 
-.visitors simple-list {
-  max-height: calc(100vh - #{$nav_height} - #{$page_title_heigth} - (#{$panel_gap} * 1.5) - ((#{$panel_row_height} * 1) + (#{$panel_gap}) * 4) - #{$panel_list_buttons});
+.visitors panel-list {
+  max-height: calc(100vh - #{$nav_height} - #{$page_title_heigth} - (#{$panel_gap} * 2) - ((#{$panel_row_height} * 1) + (#{$panel_gap}) * 4) - #{$panel_list_buttons});
+}
+
+.visitors panel-list.active {
+  max-height: calc(100vh - #{$nav_height} - #{$page_title_heigth} - (#{$panel_gap} * 2) - ((#{$panel_row_height} * 1) + (#{$panel_gap}) * 4) - #{$panel_list_buttons_users});
 }

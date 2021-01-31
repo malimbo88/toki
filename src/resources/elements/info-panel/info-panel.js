@@ -8,36 +8,69 @@ import {Settings} from '../../../services/settings';
 @inject(Router, Api, Settings)
 export class InfoPanel {
   @bindable({defaultBindingMode: bindingMode.twoWay}) selected = null;
+  @bindable({defaultBindingMode: bindingMode.twoWay}) editSelected = null;
+  @bindable({defaultBindingMode: bindingMode.twoWay}) request = null;
   statusOptions = ['visible', 'invisible', 'disabled'];
-  selectedStatus = null;
-  urlChanged = null;
 
   constructor(router, api, settings) {
     this.api = api;
     this.settings = settings;
     this.router = router;  
-  }
-
-  selectedChanged() {
-    this.selectedStatus = null;
+    this.visitors = this.settings.data.visitorsGroups;
+    this.editors = this.settings.data.editorsGroups;
   }
 
   attached() {
     this.languages = this.settings.data.languages;
     this.models = this.settings.data.templates;
-    this.visitors = this.settings.data.visitorsGroups;
-    this.editors = this.settings.data.editorsGroups;
   }
 
-  permissions(selected, visitor, data) {
+  edit(selected) {
+    this.editSelected = selected;
+  }
+
+  new(selected) {
+    this.editSelected = {
+      id: null,
+      parent: selected.id,
+      type: selected.type,
+      fieldset: selected.fieldset,
+      label: selected.label
+    };
+  }
+
+  selectedChanged(newValue, oldValue) {
+    if (!newValue || newValue === oldValue) return;
+
+    /* _visitorsGroups */
+    this.selected._visitorsGroups = [];
+    this.settings.data.visitorsGroups.forEach(group => {
+      group.checked = this.selected.visitorsGroups.includes(group.id);
+      this.selected._visitorsGroups.push(group);
+    });
+
+    /* _editorsGroups */
+    this.selected._editorsGroups = [];
+    this.settings.data.editorsGroups.forEach(group => {
+      group.checked = this.selected.editorsGroups.includes(group.id);
+      this.selected._editorsGroups.push(group);
+    });
     let flag = false;
-    if (selected) {
-      if (selected[data].includes(visitor.id)) flag = true;
+    for (let group of this.selected._editorsGroups) {
+      if (group.id === '0' && group.checked) {
+        group.disabled = false; 
+        flag = true;
+      }
+      else if (group.id !== '0' && flag) {
+        group.disabled = true;
+      }
+      else if (group.id !== '0' && !flag) {
+        group.disabled = false;
+      }
     }
-    return flag;
   }
 
-  change(field) {
+  update(field) {
     if (!this.selected || !this.selected[field]) return;
     let params = { id: this.selected.id };
 
@@ -55,16 +88,52 @@ export class InfoPanel {
     /* Visibility */
     if (field === 'status') {
       params.data = {};
-      params.data[field] = this.selectedStatus;
-      this.api.post('updateContentData', params);
+      params.data[field] = this.selected[field];
+      this.api.post('updateContent', params);
       params = { id: this.selected.id };
+    }
+
+    /* Model */
+    if (field === 'template') {
+      params.data = {};
+      params.data[field] = this.selected[field];
+      this.api.post('updateContent', params);
+      params = { id: this.selected.id };
+    }
+
+    /* Visitors */
+    if (field === 'visitorsGroups') {
+      params = { id: this.selected.id, group: field };
+      params.data = this.selected._visitorsGroups.filter(x => x.checked === true).map(x => x.id);
+      this.api.post('updateContentPermissions', params).then(xhr => {
+        this.selected.visitorsGroups = params.data;
+      });
+    }
+
+    /* Editors */
+    if (field === 'editorsGroups') {
+      params = { id: this.selected.id, group: field };
+      params.data = this.selected._editorsGroups.filter(x => x.checked === true).map(x => x.id);
+      this.api.post('updateContentPermissions', params);
     }
 
     this.api.post('buildRecursiveUrl', {
       id: this.selected.id, 
       language: this.settings.selectedLanguage 
     }).then(xhr => {
-      if (field === 'label') this.urlChanged = xhr.response;     
+      if (field === 'label') this.selected.url = xhr.response;     
     });
+  }
+
+  delete() {
+    let params = {
+      type: this.selected.type,
+      id: this.selected.id
+    }
+    this.api.post('deleteContent', params);
+  }
+  
+  copyUrl(url) {
+    navigator.clipboard.writeText(url);
   }
 }

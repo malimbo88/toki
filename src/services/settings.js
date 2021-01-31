@@ -33,9 +33,9 @@ export class Settings {
   
   init() {
     Promise.all([
-      this.api.post('getTemplates', ''),
+      this.api.post('getTemplates', { wrapper: false }),
       this.api.post('getLanguages', null),
-      this.api.post('getVisitorsGroups', ''),
+      this.api.post('getVisitorsGroups', { everybody: true }),
       this.api.post('getEditorsGroups', ''),
       this.api.post('getUsers', '')
     ]).then(success => {

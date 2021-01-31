@@ -5,7 +5,7 @@ import {Settings} from '../../../services/settings';
 @customElement('simple-list')
 @inject(Api, Settings)
 export class SimpleList {
-  @bindable() type;
+  @bindable() type = null;
   @bindable({defaultBindingMode: bindingMode.twoWay}) selected = null;
 
   constructor(api, settings) {
@@ -13,14 +13,35 @@ export class SimpleList {
     this.settings = settings;
   }
 
+  selectedChanged() {
+    if (this.selected.label) {
+      this.userGroups = [];
+      this.records.users.forEach(user => {
+        user.groups.forEach(group => {
+          if (group.label === this.selected.label) {
+            this.userGroups.push(user);
+          }
+        });
+      });
+    }
+  }
+
   attached() {
-    if (this.type.includes('Visitors')) {
-      let data = { everybody: false };
-      this.load('getVisitorsGroups', data);
-    } else if (this.type === 'usersVis') {
-      let data = { type: 2, group: false };
-      this.load('getUsers', data);
-    } else if (this.type.includes('Editors')) {
+    if (this.type === 'visitorsGroups' || this.type === 'users') {
+      Promise.all([
+        this.api.post('getVisitorsGroups', { everybody: false }),
+        this.api.post('getUsers', { type: 2, group: false })
+      ]).then(success => {
+        let response = {
+          visitorsGroups: JSON.parse(success[0].response),
+          users: JSON.parse(success[1].response)
+        };
+        this.records = response;
+        console.log(this.records)
+      });
+    }  
+
+    /*     } else if (this.type.includes('Editors')) {
       let data = { everybody: false };
       this.load('getEditorsGroups', data);
     } else if (this.type === 'usersEdi') {
@@ -36,15 +57,7 @@ export class SimpleList {
       let data = { type: '3', language: this.settings.selectedLanguage, hierarchical: false };
       this.load('getAssets', data); 
     } else {
-      this.records = [];
-    }  
-  }
-
-  load(getService, data) {
-    this.api.post(getService, data).then(xhr => {
-      let response = JSON.parse(xhr.response);
-      this.records = response;
-    });
+      this.records = []; */
   }
 
   select(record) {

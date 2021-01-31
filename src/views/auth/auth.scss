@@ -12,10 +12,10 @@
       left: 50%;
       width: $auth_panel_width;
       transform: translate(-50%, -50%);
-      background: linear-gradient($color_gradient_bg_1, $color_gradient_bg_2);
+      background: linear-gradient(#0d0d0d, #1F1F1F);
       color: $color_white_text;
       padding: 0 $auth_gap;
-      border: 4px solid $color_border_auth;
+      border: 4px solid #121212;
       box-shadow: 0px 0em 0.5rem 0.2rem rgba(0, 0, 0, 0.2);
       border-radius: 0.5rem;
       display: flex;
@@ -54,7 +54,7 @@
             line-height: 2rem;
             border: 2px solid $color_white_text;
             border-radius: $panel_border_radius;
-            background-color: $color_input_auth;
+            background-color: #d9d9d9;
             padding:0 $panel_gap;
             font-family: $roboto_font;
             font-size: 0.85rem;
@@ -72,7 +72,7 @@
         /* Button */
         .auth_button {
           text-align: center;
-          background: linear-gradient($color_label_title_panel 30%, $color_border_auth 60%);
+          background: linear-gradient($color_label_title_panel 30%, #121212 60%);
           color: $color_text;
           margin-bottom: 1.2rem;
           width: 5.2rem;

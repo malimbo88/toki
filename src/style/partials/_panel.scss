@@ -7,7 +7,7 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - #{$nav_height} - #{$page_title_heigth} - (#{$panel_gap} * 1.5));
+  height: calc(100vh - #{$nav_height} - #{$page_title_heigth} - (#{$panel_gap} * 2));
 
   &.right {
     margin-left: $panel_gap;
@@ -47,19 +47,92 @@
   .list_footer {
     background-color: $color_panel_section;
     border-radius: $panel_border_radius;
-    padding:0 $padding_row_buttons;
+    padding:0 $panel_gap;
     height: $panel_list_buttons;
     line-height: $panel_list_buttons;
     margin-top: $panel_gap;
     display: flex;
     align-items: center;
 
-    & > button:first-child {
+    &.active {
+      height: $panel_list_buttons_users;
+      line-height: unset;
+      padding: $panel_gap;
+
+      .user_change {
+        align-self: flex-start;
+        margin-right: $panel_gap;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+      
+        & > label {
+          display: inline-block;
+          margin-bottom: $panel_gap;
+        }
+
+        & > input {
+          display: block;
+          flex-grow: 0;
+          width: 100%;
+          margin-bottom: $panel_gap * 2;
+        }
+
+        .user_buttons {
+          margin-top: auto;
+          align-self: flex-start;
+        }
+      }
+
+      & select {
+        height: 100%;
+        background-color: #272727;
+        border-radius: $panel_border_radius;
+        padding: $panel_gap;
+        text-transform: capitalize;
+        width: 10rem;
+        overflow: auto;
+      }
+    }
+
+    button:first-child {
       margin-right: auto;
     }
 
-    & > button {
+    button:last-child {
+      margin-right: 0;
+    }
+
+    button {
       @include button;
+    }
+
+    input {
+      flex-grow: 1;
+      height: $info_panel_row;
+      margin: 0 $panel_gap 0 0;
+      border-radius: $panel_border_radius;
+      background-color: #d9d9d9;
+      padding:0 $panel_gap;
+      font-family: $roboto_font;
+      font-size: $font_size;
+      font-weight: 500;
+      color: $color_background_panel;
+      border: none;
+      outline: none;
+
+      &:active, &:focus {
+        flex-grow: 3;
+        flex-shrink: 1;
+      }
+
+      &::placeholder {
+        text-transform: lowercase;
+        font-size: $font_size;
+        font-weight: 400;
+        color: rgba(0, 0, 0, 0.5);
+      }
     }
   }
 

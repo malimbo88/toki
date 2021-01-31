@@ -124,15 +124,22 @@ info-panel {
             text-transform: capitalize;
             @include select;
   
-            &.active {
-              color: $color_active;
+            &.visible {
+              color: $color_visible;
 
               & > * {
                 color: $color_text;
               }
             }
-            &.inactive {
-              color: $color_inactive;
+            &.invisible {
+              color: $color_invisible;
+
+              & > * {
+                color: $color_text;
+              }
+            }
+            &.disabled {
+              color: $color_disabled;
 
               & > * {
                 color: $color_text;
@@ -146,11 +153,14 @@ info-panel {
             text-align: right;
             border-radius: $panel_border_radius;
   
-            &.active {
-              background-color:$color_active;
+            &.visible {
+              background-color:$color_visible;
             }
-            &.inactive {
-              background-color: $color_inactive;
+            &.invisible {
+              background-color: $color_invisible;
+            }
+            &.disabled {
+              background-color: $color_disabled;
             }
           }
         }

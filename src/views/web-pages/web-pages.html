@@ -1,12 +1,13 @@
 <template>
   <require from="./web-pages.scss"></require>
   <h1>Pagine web</h1>
-
+  
     <!-- Content wrapper -->
     <div class="content_wrapper web_pages">
+      <form-panel if.bind="editSelected" edit-selected.bind="editSelected" request.bind="request"></form-panel>
 
       <!-- Left panel -->
-      <div class="panel left">
+      <div if.bind="!editSelected" class="panel left">
         <h2>Pagine web</h2>
 
         <!-- Languages -->
@@ -20,12 +21,12 @@
       <!-- end Left panel -->
 
       <!-- Right panel -->
-      <div class="panel right">
+      <div if.bind="!editSelected" class="panel right">
         <h2>Info</h2>
-        <info-panel selected.bind="selected"></info-panel>
+        <info-panel selected.bind="selected" edit-selected.bind="editSelected" request.bind="request"></info-panel>
       </div>
       <!-- Right panel -->
-
+      
     </div> 
     <!-- end Content wrapper -->
 

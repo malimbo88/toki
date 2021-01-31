@@ -22,5 +22,5 @@
 }
 
 .objects panel-list {
-  height: calc(100vh - #{$nav_height} - #{$page_title_heigth} - (#{$panel_gap} * 1.5) - ((#{$panel_row_height} * 3) + (#{$panel_gap}) * 6) - #{$panel_list_buttons});
+  height: calc(100vh - #{$nav_height} - #{$page_title_heigth} - (#{$panel_gap} * 2) - ((#{$panel_row_height} * 3) + (#{$panel_gap}) * 6) - #{$panel_list_buttons});
 }
